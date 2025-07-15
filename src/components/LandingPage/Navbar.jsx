@@ -17,9 +17,6 @@ const Navbar = () => {
 
   // const crossRef = useRef(null)
   const [activeIdx, setActiveIdx] = useState(0);
-
- 
-
   return (
     <header className={style.header_OuterBox}>
       <div className={style.header_InnerBox}>

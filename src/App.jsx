@@ -6,6 +6,7 @@ const App = () => {
   // Ensure scroll to top works at app level too
   useScrollToTop();
   
+  
   return (
     <div>
       <LandingPage />
