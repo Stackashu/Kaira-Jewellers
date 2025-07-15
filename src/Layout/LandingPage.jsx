@@ -10,6 +10,8 @@ import Stores from "../components/LandingPage/Stores.jsx";
 import Collections from "../components/LandingPage/Gallery.jsx";
 import Services from "../components/LandingPage/Services.jsx";
 import Gallery from "../components/LandingPage/Collection.jsx";
+import Testimonials from "../components/LandingPage/Testimonials.jsx";
+import Catogories from "../components/LandingPage/Catogories.jsx";
 
 const LandingPage = () => {
   // Use the custom hook for scroll to top functionality
@@ -24,6 +26,8 @@ const LandingPage = () => {
       <Collections/>
       <Services/>
       <Gallery/>
+      <Testimonials/>
+      <Catogories/>
     </div>
   );
 };
