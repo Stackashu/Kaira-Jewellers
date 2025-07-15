@@ -1,62 +1,67 @@
-import style from '../../styles/LandingPage/Collection.module.css';
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import jewellery from "../../assets/Images/jewellery.jpg";
-import gsap from "gsap";
+import style from '../../styles/LandingPage/Collection.module.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import img1 from "../../assets/Images/BlackLayout/img1.jpeg";
+import img2 from "../../assets/Images/BlackLayout/img2.jpeg";
+import img3 from "../../assets/Images/BlackLayout/img3.jpeg";
+import img4 from "../../assets/Images/BlackLayout/img4.jpeg";
+import img5 from "../../assets/Images/BlackLayout/img5.jpeg";
+import img6 from "../../assets/Images/BlackLayout/img6.jpeg";
+import img7 from "../../assets/Images/BlackLayout/img7.jpeg";
+import img8 from "../../assets/Images/BlackLayout/img8.jpg";
+import img9 from "../../assets/Images/BlackLayout/img9.png";
 
 const Gallery = () => {
-  const photoCont1Ref = useRef(null);
-  const photoCont2Ref = useRef(null);
-  const anim1 = useRef(null);
-  const anim2 = useRef(null);
-
-  useEffect(() => {
-    // Reset any previous animations
-    gsap.set(photoCont1Ref.current, { x: "0%" });
-    gsap.set(photoCont2Ref.current, { x: "0%" });
-
-    // Animate both rows in sync but in opposite directions, smoothly and continuously
-    if (photoCont1Ref.current && photoCont2Ref.current) {
-      anim1.current = gsap.to(photoCont1Ref.current, {
-        x: "-20%",
-        repeat: -1,
-        duration: 60,
-        ease: "power1.inOut", // smoother than linear
-      });
-      anim2.current = gsap.to(photoCont2Ref.current, {
-        x: "20%",
-        repeat: -1,
-        duration: 60,
-        ease: "power1.inOut", // smoother than linear
-      });
-    }
-
-    // Cleanup on unmount
-    return () => {
-      if (anim1.current) anim1.current.kill();
-      if (anim2.current) anim2.current.kill();
-    };
-  }, []);
+  const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
   return (
     <div className={style.outer_CollBox}>
       <h1>Collections</h1>
       <div className={style.photos_Wrapper}>
-        <div
-          className={style.photo_Cont}
-          ref={photoCont1Ref}
+        {/* Row 1: Left to right */}
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={10}
+          slidesPerView={'auto'}
+          loop={true}
+          speed={6000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            reverseDirection: false,
+          }}
+          className={style.swiperRow}
         >
-          {Array.from({ length: 18 }).map((_, idx) => (
-            <img src={jewellery} alt="jewellery" key={`row1-${idx}`} />
+          {images.map((img, idx) => (
+            <SwiperSlide className={style.slide} key={`r1-${idx}`}>
+              <img src={img} alt={`jewellery-${idx+1}`} loading="lazy" />
+            </SwiperSlide>
           ))}
-        </div>
-        <div
-          className={style.photo_Cont}
-          ref={photoCont2Ref}
+        </Swiper>
+
+        {/* Row 2: Right to left */}
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={10}
+          slidesPerView={'auto'}
+          loop={true}
+          speed={4000}
+          autoplay={{
+            delay: -1,
+            disableOnInteraction: false,
+            reverseDirection: false,
+          }}
+          className={style.swiperRow}
         >
-          {Array.from({ length: 18 }).map((_, idx) => (
-            <img src={jewellery} alt="jewellery" key={`row2-${idx}`} />
+          {images.map((img, idx) => (
+            <SwiperSlide className={style.slide} key={`r2-${idx}`}>
+              <img src={img} alt={`jewellery-${idx+1}`} loading="lazy" />
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </div>
   );

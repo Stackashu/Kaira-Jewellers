@@ -17,6 +17,10 @@ const Hero = () => {
 
   return (
     <div className={style.Hero_OuterBox} >
+      {/* <div className={style.balls}></div> */}
+      {/* <div className={style.balls}></div> */}
+      {/* <div className={style.balls}></div> */}
+    
       <div ref={heroRef}>
         <div className={style.Hero_InnerBox}>
           <h1>
