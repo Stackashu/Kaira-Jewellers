@@ -40,16 +40,17 @@ const RingModel = ({ mainContainer }) => {
     cameraRef.current = camera;
 
     // Renderer setup
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio for performance
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, logarithmicDepthBuffer: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Slightly higher for clarity
     renderer.setSize(
       mountRef.current.clientWidth,
       mountRef.current.clientHeight
     );
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure =1;
-    renderer.shadowMap.enabled = false; // Disable shadow maps for performance
+    renderer.toneMappingExposure = 1.2;
+    renderer.shadowMap.enabled = true; // Enable shadow maps for realism
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     rendererRef.current = renderer;
 
     mountRef.current.appendChild(renderer.domElement);
@@ -70,24 +71,35 @@ const RingModel = ({ mainContainer }) => {
         }
       );
 
-    // Lighting - set the lighting on the top of the model
-    // Main top directional light
-    const topLight = new THREE.DirectionalLight(0xffffff, 3.5);
-    topLight.position.set(0, 10, 0); // Directly above the model
-    topLight.target.position.set(0, 0, 0);
+    // Lighting - enhanced for realism
+    // Main top directional light (casts shadow)
+    const topLight = new THREE.DirectionalLight(0xffffff, 1.7);
+    topLight.position.set(0, 10, 0);
+    topLight.castShadow = true;
+    topLight.shadow.mapSize.width = 1024;
+    topLight.shadow.mapSize.height = 1024;
+    topLight.shadow.camera.near = 1;
+    topLight.shadow.camera.far = 30;
+    topLight.shadow.camera.left = -10;
+    topLight.shadow.camera.right = 10;
+    topLight.shadow.camera.top = 10;
+    topLight.shadow.camera.bottom = -10;
     scene.add(topLight);
-    // scene.add(topLight.target);
 
-    // Optional: Add a soft fill light from the front to gently illuminate the face
+    // Soft fill light from the front
     const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
     fillLight.position.set(0, 3, 6);
-    fillLight.target.position.set(0, 0, 0);
+    fillLight.castShadow = false;
     scene.add(fillLight);
-    // scene.add(fillLight.target);
 
-    // Optional: Add a subtle ambient light for soft shadow fill
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
+    // Subtle ambient light for soft shadow fill
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.22);
     scene.add(ambientLight);
+
+    // Rim light for extra sparkle
+    const rimLight = new THREE.PointLight(0xffffff, 0.5, 20);
+    rimLight.position.set(-5, 5, 5);
+    scene.add(rimLight);
 
     // Draco Loader setup
     const dracoLoader = new DRACOLoader();
@@ -99,10 +111,29 @@ const RingModel = ({ mainContainer }) => {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-      "/goldFolder/scene.gltf",
+      "/ring3.glb",
       (gltf) => {
         const ringModel = gltf.scene;
-        
+
+        // --- ENHANCEMENT: Material and mesh improvements ---
+
+        // Traverse and enhance materials
+        ringModel.traverse((child) => {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+            if (child.material) {
+              // Ensure only front side is rendered (no double side)
+              child.material.side = THREE.FrontSide;
+              // Enhance metalness/roughness for more realistic gold/silver
+              if ("metalness" in child.material) child.material.metalness = 1;
+              if ("roughness" in child.material) child.material.roughness = 0.18;
+              if ("envMapIntensity" in child.material) child.material.envMapIntensity = 1.5;
+              child.material.needsUpdate = true;
+            }
+          }
+        });
+
 
         // Determine viewport width to set different values for desktop/tablet/mobile
         const vw = window.innerWidth;
@@ -111,46 +142,46 @@ const RingModel = ({ mainContainer }) => {
         // ringModel.add(axesHelper);
 
         // Default (desktop)
-        let initialPos = { x: -2, y: 2, z: 4 };
-        let initialScale = { x: 5.9, y: 5.9, z: 5.9 };
-        let initialRot = { x:0, y: -Math.PI / 4, z: 0 };
-        let toAnimatePos = { x: -2, y: 1.4, z: 0 }; // New: intermediate animation position
-        let toAnimateRot = { x:Math.PI /2 * 0.9, y: Math.PI / 2 * 0.5 , z:0 }; // Target y rotation for initial animation
-        let scrollToPos = { x: 2, y: 0.2 };
-        let scrollToScale = { x: 5.2, y: 5.2, z: 5.2 };
-        let scrollToRot = { y: (Math.PI / 2) * 8, x: Math.PI / 2 * 0.01 };
+        let initialPos = { x: -2, y: 1, z: 6 };
+        let initialScale = { x: 17, y: 17, z: 17 };
+        let initialRot = {  x: Math.PI / 2 * 0.7, y: Math.PI / 2 * 1.6, z: 0  };
+        let toAnimatePos = { x: -1.8, y: 0.7, z: 0 };
+        let toAnimateRot = { x:Math.PI/2*0.8,y:Math.PI/2 * 0.3, z: -Math.PI/ 2 * 0.1 };
+        let scrollToPos = { x: 1.5, y: 1.3,z:0.5 };
+        let scrollToScale = { x: 17, y: 17, z: 17 };
+        let scrollToRot = { y: (Math.PI / 2) * 2.5, x: Math.PI / 2  };
 
         // Tablet
         if (vw <= 900 && vw > 600) {
-          initialPos = { x: -0.7, y: 1.5, z: 0.5 };
-          initialScale = { x: 2.6, y: 2.6, z: 2.6 };
-          initialRot = { x: (Math.PI / 3) * 1.3, y: (Math.PI / 2) * 0.4, z: 0 };
-          toAnimatePos = { x: 0.08, y: 2.45, z: 0 };
-          toAnimateRot = { x: Math.PI/2  * 0.8, y:Math.PI/2 * 0.3, z:Math.PI /2 * 0.5 };
-          scrollToPos = { x: 0, y: 0.1,z:0 };
-          scrollToScale = { x: 2.5, y: 2.5, z: 2.5 };
-          scrollToRot = { y: Math.PI * 4 , x: Math.PI /2 * 0.6  , z: 0 };
+          initialPos = { x: -1, y: 2, z: 4.5 };
+          initialScale = { x: 15, y: 15, z:15 };
+          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
+          toAnimatePos = { x: 0, y: 1.6, z: 0 };
+          toAnimateRot = { x:Math.PI/2 * 0.9,y:0,z:Math.PI/2 * 0.1 };
+          scrollToPos = { x: 0, y: 1.4, z: 0 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0 };
         }
-        
+
         if (vw <= 480) {
-          initialPos = { x: -1, y: 2, z: 2 };
-          initialScale = { x: 3.5, y: 3.5, z: 3.5 };
-          initialRot = { x:0, y:0, z:0 };
-          toAnimatePos = { x: 0, y: 2, z: 0 };
-          toAnimateRot = { x: Math.PI/2  * 0.6, y:Math.PI/2 * 0.3, z:Math.PI /2 * 0.5 };
-          scrollToPos = { x: 0, y: 0.9,z:0 };
-          scrollToScale = { x: 4, y: 4, z: 4 };
-          scrollToRot = { y: Math.PI * 4 , x: Math.PI /2   , z: 0 };
+          initialPos = { x: -0.5, y: 2, z: 4 };
+          initialScale = { x: 14, y: 14, z: 14 };
+          initialRot = { x: 0, y: 0, z: 0 };
+          toAnimatePos = { x: 0.1, y: 1.8, z: 0 };
+          toAnimateRot = { x: Math.PI / 2, y: 0, z:  0 };
+          scrollToPos = { x: 0, y: 0.9, z: 0 };
+          scrollToScale = { x: 13, y: 13, z: 13 };
+          scrollToRot = {y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0  };
         }
         if (vw <= 390) {
-          initialPos = { x: -1, y: 2, z: 2 };
-          initialScale = { x: 3.5, y: 3.5, z: 3.5 };
-          initialRot = { x:0, y:0, z:0 };
-          toAnimatePos = { x: 0, y: 2.2, z: 0 };
-          toAnimateRot = { x: Math.PI/2  * 0.6, y:Math.PI/2 * 0.3, z:Math.PI /2 * 0.5 };
-          scrollToPos = { x: 0, y: 1.8,z:0 };
-          scrollToScale = { x: 4, y: 4, z: 4 };
-          scrollToRot = { y: Math.PI  * 4 , x: Math.PI / 2   , z: 0 };
+          initialPos = { x: -0.5, y: 2, z: 4 };
+          initialScale = { x: 14, y: 14, z: 14 };
+          initialRot = { x: 0, y: 0, z: 0 };
+          toAnimatePos = { x: 0.1, y: 1.8, z: 0 };
+          toAnimateRot = { x: Math.PI / 2, y: 0, z:  0 };
+          scrollToPos = { x: 0, y: 1.3, z: 0 };
+          scrollToScale = { x: 15, y: 15, z: 15 };
+          scrollToRot = {y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0  };
         }
 
         // Set initial position, scale, and rotation using initial values
@@ -160,51 +191,59 @@ const RingModel = ({ mainContainer }) => {
         scene.add(ringModel);
 
         // Animate the model smoothly from its initial position to the "toAnimatePos" AND rotate in y axis in sync
-        gsap.to(ringModel.position, {
-          ...toAnimatePos,
-          duration: 2,
-          ease: "power2.inOut",
-        },0);
-        gsap.to(ringModel.rotation, {
-          ...toAnimateRot,
-          duration: 2,
-          ease: "power2.inOut",
-          onComplete: () => {
-            // Only start scrollTrigger timeline after initial animation is done
-            var tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: mainContainer.current,
-                start: "top 10%",
-                end: "bottom 90%",
-                scrub: 2,
-              },
-            });
-            tl.to(
-              ringModel.position,
-              {
-                ...scrollToPos,
-                ease: "power2.inOut",
-              },
-              0
-            );
-            tl.to(
-              ringModel.rotation,
-              {
-                ...scrollToRot,
-                ease: "power2.inOut",
-              },
-              0
-            );
-            tl.to(
-              ringModel.scale,
-              {
-                ...scrollToScale,
-                ease: "power2.inOut",
-              },
-              0
-            );
+        gsap.to(
+          ringModel.position,
+          {
+            ...toAnimatePos,
+            duration: 2.5,
+            ease: "power2.inOut",
           },
-        },0);
+          0
+        );
+        gsap.to(
+          ringModel.rotation,
+          {
+            ...toAnimateRot,
+            duration: 2,
+            ease: "power2.inOut",
+            onComplete: () => {
+              // Only start scrollTrigger timeline after initial animation is done
+              var tl = gsap.timeline({
+                scrollTrigger: {
+                  trigger: mainContainer.current,
+                  start: "top 10%",
+                  end: "bottom bottom",
+                  scrub: 2,
+                },
+              });
+              tl.to(
+                ringModel.position,
+                {
+                  ...scrollToPos,
+                  ease: "power2.inOut",
+                },
+                0
+              );
+              tl.to(
+                ringModel.rotation,
+                {
+                  ...scrollToRot,
+                  ease: "power2.inOut",
+                },
+                0
+              );
+              tl.to(
+                ringModel.scale,
+                {
+                  ...scrollToScale,
+                  ease: "power2.inOut",
+                },
+                0
+              );
+            },
+          },
+          0
+        );
       },
       undefined,
       (error) => {
@@ -212,9 +251,12 @@ const RingModel = ({ mainContainer }) => {
       }
     );
 
-    // Animation loop
+  
     const animate = () => {
       requestAnimationFrame(animate);
+
+     
+
       renderer.render(scene, camera);
     };
     animate();
@@ -250,7 +292,7 @@ const RingModel = ({ mainContainer }) => {
       ref={mountRef}
       style={{
         width: "100%",
-        height: "100vh",
+        height: "90vh",
         position: "",
         background: "transparent",
         pointerEvents: "auto",
