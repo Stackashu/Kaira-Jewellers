@@ -1,105 +1,123 @@
-.outer_CollBox{
-    width: 100%;
-    height: 90vh;  
-    overflow: hidden; 
+.outer_CollBox {
+  width: 100%;
+  height: 100vh;
+  /* overflow: hidden; */
+  /* background: #000; */
 }
+<<<<<<< HEAD
  
 .outer_CollBox h1{
     text-align: center;
     font-size: 3rem;
     font-weight: 500;
+=======
+
+.outer_CollBox h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 500;
+>>>>>>> f38724fc71d1c5ea56497f5fb4e8c23330488f86
 }
 
-.photos_Wrapper{
+.photos_Wrapper {
   margin-top: 2rem;
-    background: rgba(247, 240, 244, 0.73);
-    height: 65%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 5px;
+  background: rgb(0, 0, 0);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 5px;
 }
 
-.photo_Cont{
-    display: flex;
-    width: 350%;
-    gap: 10px;
+.swiperRow {
+  width: 100%;
+  height: 40%;
+  padding: 0;
+  margin: 0;
 }
-.photo_Cont img {
-  width: 700px;
-  height: 30vh;
+
+.slide {
+  width: auto !important;
+  flex-shrink: 0;
+  /* margin: 0 !important; */
+  /* padding: 0 !important; */
+}
+
+
+.slide img {
+  width: 50vw; /* You can tweak this as needed */
+  height: 100%;
   object-fit: cover;
   border-radius: 4px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: block;         /* ✅ Removes inline spacing */
+  /* margin: 0 !important;   ✅ Ensure no margin */
+  /* padding: 0 !important;  ✅ Ensure no padding */
 }
 
-/* Responsive for 786px */
+/* Responsive Styles */
 @media (max-width: 786px) {
   .outer_CollBox {
     height: 80vh;
+    margin-top: 4rem;
   }
+
   .outer_CollBox h1 {
     font-size: 2.2rem;
   }
+
   .photos_Wrapper {
-    height: 60%;
-    gap: 8px;
-    padding: 3px;
+    height: 90%;
+    gap: 12px;
   }
-  .photo_Cont {
-    width: 600%;
-    gap: 8px;
+
+  .swiperRow {
+    height: 40vh;
   }
-  .photo_Cont img {
-    width: 320px;
-    height: 22vh;
+
+  .slide img {
+    width: 300px;
   }
 }
 
-/* Responsive for 480px */
 @media (max-width: 480px) {
   .outer_CollBox {
     height: 70vh;
   }
+
   .outer_CollBox h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
+
   .photos_Wrapper {
-    height: 55%;
-    gap: 6px;
-    padding: 2px;
+    height: 80%;
+    gap: 10px;
   }
-  .photo_Cont {
-    width: 1200%;
-    gap: 6px;
+
+  .swiperRow {
+    height: 800px;
   }
-  .photo_Cont img {
-    width: 180px;
-    height: 16vh;
+
+  .slide img {
+    width: 200px;
   }
 }
 
-/* Responsive for 390px */
 @media (max-width: 390px) {
   .outer_CollBox {
-    height: 60vh;
+    height: 90vh;
   }
+
   .outer_CollBox h1 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
-  .photos_Wrapper {
-    height: 80%;
-    gap: 4px;
-    padding: 1px;
+
+  .swiperRow {
+    height: 800px;
   }
-  .photo_Cont {
-    width: 1100%;
-    gap: 4px;
-  }
-  .photo_Cont img {
-    width: 180px;
-    height: 20vh;
+
+  .slide img {
+    width: 160px;
   }
 }

@@ -12,21 +12,25 @@ const Collections = () => {
   useEffect(() => {
     if (!videoRef.current || !outerRef.current) return;
 
-    let startValue = "top 10%";
-    let borderRadius = "25px";
-    let scaleValue = "1.2";
-    let finalValue = "0.95";
-    if (window.innerWidth <= 768) {
-      startValue = "top 50%";
-      scaleValue = "0.9";
+    // Responsive values
+    let startValue, borderRadius, scaleValue, endValue;
+    const width = window.innerWidth;
+
+    if (width <= 480) {
+      startValue = "top 80%";
       borderRadius = "0px";
-      finalValue = "1";
-    }
-    if (window.innerWidth <= 486) {
+      scaleValue = 1;
+      endValue = "top 50%";
+    } else if (width <= 768) {
       startValue = "top 50%";
-      scaleValue = "0.9";
       borderRadius = "0px";
-      finalValue = "1";
+      scaleValue = 1.4;
+      endValue = "bottom bottom";
+    } else {
+      startValue = "top 50%";
+      borderRadius = "25px";
+      scaleValue = 0.8;
+      endValue = "top 10%";
     }
 
     const anim = gsap.fromTo(
@@ -38,14 +42,15 @@ const Collections = () => {
       },
       {
         y: 0,
-        scale: finalValue,
+        scale: 1,
         borderRadius: borderRadius,
-        duration: 1.5,
-        ease: "power3.out",
+        duration: 1,
+        ease: "power2.inOut",
         scrollTrigger: {
           trigger: outerRef.current,
           start: startValue,
-          end: "top -10%",
+          // markers:true,
+          end: endValue,
           toggleActions: "play none none reverse",
         },
       }
@@ -53,14 +58,16 @@ const Collections = () => {
 
     return () => {
       if (anim) anim.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (ScrollTrigger) {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      }
     };
   }, []);
 
   return (
-    <div className={style.Collections_Cont} ref={outerRef}>
+    <div  className={style.Collections_Cont} ref={outerRef}>
       <h1>Gallery</h1>
-      <div   ref={videoRef} className={style.video_Cont} style={{padding:"10px",borderRadius:'25px',background:"white"}}>
+      <div   ref={videoRef} className={style.video_Cont} >
         <iframe
         
           className={style.iframe_vid}

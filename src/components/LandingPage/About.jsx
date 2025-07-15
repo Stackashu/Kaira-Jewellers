@@ -56,7 +56,7 @@ const About = (props) => {
         paragraphRef.current,
         { x: "-100%", opacity: 0 },
         {
-          x: "0%",
+          x: "0%",  
           opacity: 1,
           duration: 1.2,
           delay: 0.2,

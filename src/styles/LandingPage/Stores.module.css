@@ -93,7 +93,7 @@
         height: auto;
         min-height: 50vh;
         padding-bottom: 2rem;
-        margin-top: 2rem;
+        margin-top: -1rem;
     }
     .top_Inside h1 {
         font-size: 2rem;
@@ -137,6 +137,70 @@
         height: auto;
         min-height: 50vh;
         padding-bottom: 1rem;
+        margin-top: -3rem;
+    }
+    .top_StoreCont {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .top_Inside h1 {
+        font-size: 0.9rem;
+    }
+    .top_Inside h2 {
+        font-size: 0.8rem;
+        margin-top: -1rem;
+    }
+    .bar {
+        height: 3px;
+    }
+    .left, .right {
+        width: 30%;
+        /* left: unset; */
+        /* right: unset; */
+        top: 30%;
+    }
+    .left {
+        left: 5%;
+    }
+    .right {
+        right: 5%;
+    }
+    .verticalBar {
+        
+        display: none;
+        
+    }
+    .address_Box {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 5;
+        margin-top: 1rem;
+    }
+    .add_Cont {
+        width: 80vw;
+        /* max-width: 98vw; */
+        min-width: 0;
+        height: 20vh;
+        /* min-height: 100px; */
+        padding: 0.7rem;
+    }
+    .add_Cont h1{
+        font-size: 1rem;
+    }
+
+    .add_Cont p{
+        font-size: 0.8rem;
+    }
+}
+
+
+/* Responsive for mobile (max-width: 480px) */
+@media (max-width: 390px) {
+    .outer_StoreBox {
+        height: auto;
+        min-height: 50vh;
+        padding-bottom: 1rem;
+        margin-top: -4rem;
     }
     .top_StoreCont {
         flex-direction: column;
