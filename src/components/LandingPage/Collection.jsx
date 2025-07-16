@@ -16,7 +16,7 @@ import img9 from "../../assets/Images/BlackLayout/img9.png";
 
 const Gallery = () => {
   const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
-
+ 
   return (
     <div className={style.outer_CollBox}>
       <h1>Collections</h1>

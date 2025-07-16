@@ -5,6 +5,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Make store data dynamic
+const storesData = [
+  {
+    name: "KS KAIRA JEWELLERS PVT LTD.",
+    address: "Shop No.1 Huda Market, Sector 23, Gurugram, Haryana, India",
+  },
+  {
+    name: "KAIRA JEWELLERS",
+    address:
+      "Shop number - GF32, Greater Noida W Rd, Gaur City 1, Sector 4, Greater Noida, Ghaziabad, Uttar Pradesh 201306",
+  },
+  // Add more stores here as needed
+];
+
 const Stores = () => {
   const boxRefs = useRef([]);
   const outerBoxRef = useRef(null);
@@ -59,23 +73,16 @@ const Stores = () => {
       </div>
       <div className={`${style.bar} ${style.verticalBar}`}></div>
       <div className={style.address_Box}>
-        <div
-          ref={el => (boxRefs.current[0] = el)}
-          className={style.add_Cont}
-        >
-          <h1>KS KAIRA JEWELLERS PVT LTD.</h1>
-          <p>Shop No.1 Huda Market, Sector 23, Gurugram, Haryana, India</p>
-        </div>
-        <div
-          ref={el => (boxRefs.current[1] = el)}
-          className={style.add_Cont}
-        >
-          <h1>KAIRA JEWELLERS</h1>
-          <p>
-            Shop number - GF32, Greater Noida W Rd, Gaur City 1, Sector 4,
-            Greater Noida, Ghaziabad, Uttar Pradesh 201306
-          </p>
-        </div>
+        {storesData.map((store, idx) => (
+          <div
+            key={idx}
+            ref={el => (boxRefs.current[idx] = el)}
+            className={style.add_Cont}
+          >
+            <h1>{store.name}</h1>
+            <p>{store.address}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

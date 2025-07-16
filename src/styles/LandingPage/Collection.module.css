@@ -4,24 +4,16 @@
   /* overflow: hidden; */
   /* background: #000; */
 }
-<<<<<<< HEAD
  
 .outer_CollBox h1{
     text-align: center;
     font-size: 3rem;
     font-weight: 500;
-=======
-
-.outer_CollBox h1 {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 500;
->>>>>>> f38724fc71d1c5ea56497f5fb4e8c23330488f86
 }
 
 .photos_Wrapper {
   margin-top: 2rem;
-  background: rgb(0, 0, 0);
+  /* background: rgb(0, 0, 0); */
   height: 100%;
   display: flex;
   flex-direction: column;

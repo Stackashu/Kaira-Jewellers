@@ -4,8 +4,26 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+const para = ` At KS Kaira Jewellers Pvt. Ltd., jewellery is not only an adornment
+            but an expression of identity, elegance, and cultural legacy. Based in
+            Palam Vihar, Gurgaon, we have earned a trusted name in the jewellery
+            industry through our unwavering commitment to quality, craftsmanship,
+            and customer satisfaction. Our journey began with a vision to
+            seamlessly blend traditional artistry with modern aesthetics, crafting
+            timeless pieces that speak to both heritage and individuality.`
 
-const About = (props) => {
+const aboutData = [
+  {
+    num:"500",
+    name:"Happy Customers"
+  },
+  {
+    num:"5",
+    name:"Branches"
+  }
+]
+
+const About = () => {
   const containerRef = useRef(null);
   const aboutHeaderRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -93,29 +111,21 @@ const About = (props) => {
         <h1 ref={aboutHeaderRef} className={style.about}>About Us</h1>
         <div ref={bottomContainerRef} className={style.bottom_Container}>
           <p ref={paragraphRef}>
-            At KS Kaira Jewellers Pvt. Ltd., jewellery is not only an adornment
-            but an expression of identity, elegance, and cultural legacy. Based in
-            Palam Vihar, Gurgaon, we have earned a trusted name in the jewellery
-            industry through our unwavering commitment to quality, craftsmanship,
-            and customer satisfaction. Our journey began with a vision to
-            seamlessly blend traditional artistry with modern aesthetics, crafting
-            timeless pieces that speak to both heritage and individuality.
+           {para}
           </p>
 
           <div ref={countingRef} className={style.Counting}>
-            <div className={style.happy_Customers}>
-              <h1 className={style.num}>500+</h1>
-              <h1 className={style.text}>Happy Customers</h1>
-            </div>
-
-            <div className={style.happy_Customers}>
-              <h1 className={style.num}>5+</h1>
-              <h1 className={style.text}>Branches</h1>
-            </div>
+            {aboutData.map((data,idx)=>(
+              <div  key={idx} className={style.happy_Customers}>
+                <h1 className={style.num}>{data.num}+</h1>
+                <h1 className={style.text}>{data.name}</h1>
+              </div>
+            ))}
+           
           </div>
         </div>
       </div>
-      {props.Children}
+     
     </div>
   );
 };

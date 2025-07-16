@@ -2,8 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import style from "../../styles/LandingPage/Hero.module.css";
 import gsap from 'gsap';
 
+const qoute ="  Jewellery is a story you wear, a memory you treasure, and a promise you keep."
 const Hero = () => {
   const heroRef = useRef(null);
+
 
   useEffect(() => {
     if (heroRef.current) {
@@ -28,8 +30,7 @@ const Hero = () => {
             Jewellers
           </h1>
           <p>
-            Jewellery is a story you wear, a memory you treasure, and a promise
-            you keep.
+           {qoute}
           </p>
         </div>
 

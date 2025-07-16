@@ -5,7 +5,6 @@ import useScrollToTop from "../hooks/useScrollToTop.js";
 import style from "../styles/Landing/LandingPage.module.css";
 
 import AnimationCompo from "../components/LandingPage/AnimationCompo.jsx";
-// import Carasoule from "../components/LandingPage/Carasoule.jsx";
 import Stores from "../components/LandingPage/Stores.jsx";
 import Collections from "../components/LandingPage/Gallery.jsx";
 import Services from "../components/LandingPage/Services.jsx";
@@ -28,9 +27,9 @@ const LandingPage = () => {
       <Gallery/>
       <Services/>
       <BlackBanner/>
+      {/* <Catogories/> */}
+      {/* <Testimonials/> */}
       <Footer/>
-      <Testimonials/>
-      <Catogories/>
       
     </div>
   );
