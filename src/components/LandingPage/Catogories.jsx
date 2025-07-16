@@ -23,6 +23,8 @@ const Catogories = () => {
         <div className={styles.Catogories_title}>
           <h1>Categories</h1>
         </div>
+
+       
         <div className={styles.Catogories_main_boxes}>
           {categoriesData.map((category, idx) => (
             <div className={styles.Catogories_boxes} key={idx}>
@@ -37,6 +39,9 @@ const Catogories = () => {
             </div>
           ))}
         </div>
+
+
+
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import Gallery from "../components/LandingPage/Collection.jsx";
 import Testimonials from "../components/LandingPage/Testimonials.jsx";
 import Catogories from "../components/LandingPage/Catogories.jsx";
 import BlackBanner from "../components/LandingPage/BlackBanner.jsx"
-import Footer from "../components/LandingPage/Footer.jsx";
+// import Footer from "../components/LandingPage/Footer.jsx";
 const LandingPage = () => {
   // Use the custom hook for scroll to top functionality
   useScrollToTop();
@@ -27,9 +27,15 @@ const LandingPage = () => {
       <Gallery/>
       <Services/>
       <BlackBanner/>
+<<<<<<< HEAD
+      {/* <Footer/> */}
+      <Testimonials/>
+      <Catogories/>
+=======
       {/* <Catogories/> */}
       {/* <Testimonials/> */}
       <Footer/>
+>>>>>>> 6c85cbc6168310c6f351b0e2a13895bbf4f6b7d0
       
     </div>
   );
