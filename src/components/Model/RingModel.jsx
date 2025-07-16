@@ -41,7 +41,7 @@ const RingModel = ({ mainContainer }) => {
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, logarithmicDepthBuffer: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Slightly higher for clarity
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Slightly higher for clarity
     renderer.setSize(
       mountRef.current.clientWidth,
       mountRef.current.clientHeight

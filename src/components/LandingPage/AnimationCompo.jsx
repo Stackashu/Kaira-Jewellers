@@ -10,7 +10,7 @@ const AnimationCompo = () => {
   return (
     <div ref={mainContainer} className={style.Model_Container}>
       <div className={style.Animation_box}>
-        {/* <RingModel mainContainer={mainContainer} /> */}
+        <RingModel mainContainer={mainContainer} />
       </div>
       <div style={{position:"absolute",top:"0",right:"0"}}>
       <Hero />
