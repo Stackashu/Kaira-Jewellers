@@ -5,20 +5,12 @@
   /* overflow: hidden; */
   /* background: #000; */
 }
-<<<<<<< HEAD
 
 
 .outer_CollBox h1{
   text-align: center;
   font-size: 3rem;
   font-weight: 500;
-=======
- 
-.outer_CollBox h1{
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 500;
->>>>>>> 6c85cbc6168310c6f351b0e2a13895bbf4f6b7d0
 }
 
 .photos_Wrapper {

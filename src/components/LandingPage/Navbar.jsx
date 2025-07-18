@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "../../styles/LandingPage/Navbar.module.css";
 import headeLogo from "../../assets/Images/KairaLogo.png";
+import { useNavigate } from "react-router-dom";
 // import gsap from "gsap";
 
 const nav = [
-  "About",
-  "Stores",
-  "Franchise",
-  "Customize Products",
-  "Franchise Enquiry",
+  {name:"About",link:"/"},
+  {name:"Stores",link:"/stores"},
+  {name:"Franchise",link:"/Franchise"},
+  {name:"Customize Product",link:"Customization"},
+  {name:"Franchise",link:"FranchiseEnq"}
+ 
 ]; 
 
 const Navbar = () => {
+  const navigate = useNavigate(null)
   const navBarRef = useRef(null);
   const [isTrayOpen, setIsTrayOpen] = useState(false);
 
@@ -53,14 +56,14 @@ const Navbar = () => {
             {nav.map((item, idx) => (
               <div key={idx} >
                 <li
-                  onClick={() => {setActiveIdx(idx); setIsTrayOpen(false)}}
+                  onClick={() => {setActiveIdx(idx); setIsTrayOpen(false); navigate(`${item.link}`) }}
                   style={{
                     color: activeIdx === idx ? "rgb(179, 100, 100)" : "",
                     fontWeight: activeIdx === idx ? "bold" : "normal",
                     transition: "color 0.2s",
                   }}
                 >
-                  {item}
+                  {item.name}
                 </li>
               </div>
             ))}
