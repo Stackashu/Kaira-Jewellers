@@ -13,8 +13,8 @@ const MainCont = () => {
       <AnimationCompo/>
       <Stores/>
       <Collections/>
-      <Services/>
       <Gallery/>
+      <Services/>
       <BlackBanner/>
       <Testimonials/>
       <Catogories/>
