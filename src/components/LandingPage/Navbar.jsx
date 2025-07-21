@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import gsap from "gsap";
 
 const nav = [
-  {name:"About",link:"/"},
+  {name:"Home",link:"/"},
   {name:"Stores",link:"/stores"},
   {name:"Franchise",link:"/Franchise"},
   {name:"Customize Product",link:"Customization"},

@@ -13,11 +13,7 @@ const RingModel = ({ mainContainer }) => {
   const sceneRef = useRef(null);
   const dracoLoaderRef = useRef(null);
   const envMapRef = useRef(null);
- useEffect(() => {
-   console.log(window.innerWidth)
  
-   
- }, [])
  
   // Helper to resize renderer and camera
   const handleResize = () => {
@@ -43,7 +39,7 @@ const RingModel = ({ mainContainer }) => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, logarithmicDepthBuffer: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Slightly higher for clarity
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Slightly higher for clarity
     renderer.setSize(
       mountRef.current.clientWidth,
       mountRef.current.clientHeight

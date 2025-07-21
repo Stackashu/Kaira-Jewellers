@@ -31,7 +31,7 @@ const points = [
 ];
 const states = [
   "Delhi NCR",
-  "Chandigarh-Tricity",
+  "Chandigarh",
   "Jaipur",
   "Lucknow",
   "Dehradun",
