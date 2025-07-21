@@ -59,7 +59,7 @@ const rightData = [
 const Footer = () => {
   // State to track device width for responsive logic
   const [isTabletOrBelow, setIsTabletOrBelow] = useState(
-    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+    typeof window !== "undefined" ? window.innerWidth <= 1024 : false
   );
   // Shutter state for leftData, initially closed
   const [openLeft, setOpenLeft] = useState([false, false]);
@@ -67,7 +67,7 @@ const Footer = () => {
   // Update isTabletOrBelow on resize
   useEffect(() => {
     const handleResize = () => {
-      setIsTabletOrBelow(window.innerWidth <= 768);
+      setIsTabletOrBelow(window.innerWidth <= 1024);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -144,7 +144,7 @@ const Footer = () => {
           {rightData.map((item, idx) => (
             <div className={style.data_Cont} key={idx}>
               <h1>{item.mainHead}</h1>
-              <div className={style.list_Cont}>
+              <div className={style.list_Cont1}>
                 {item.links?.map((link, linkIdx) => (
                   <li key={linkIdx}>
                     <span style={{ marginRight: "0.5em" }}>{link.logo}</span>

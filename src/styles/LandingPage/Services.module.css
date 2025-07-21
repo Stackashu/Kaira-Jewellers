@@ -1,25 +1,22 @@
-.outer_ServiceBox{
-    width: 100%;
-    margin-top: 4rem;
-    /* background: yellow; */
-    padding: 0rem 5rem ;
-    height: 30vh;
-    margin-bottom: 8rem;
-
+.outer_ServiceBox {
+  width: 100%;
+  margin-top: 4rem;
+  padding: 0rem 5rem;
+  height: 30vh;
+  margin-bottom: 8rem;
 }
-.outer_ServiceBox h1{
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 500;
+.outer_ServiceBox h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 500;
 }
 
-.Cont_serve{
-    /* background: rebeccapurple; */
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.Cont_serve {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.main{
+.main {
   background: rgba(255, 251, 251, 0.67);
   width: 30vh;
   display: flex;
@@ -28,15 +25,37 @@
   align-items: center;
   height: 20vh;
   border-radius: 25px;
-  box-shadow: -8px -8px 16px 0px rgba(0,0,0,0.12), -8px 0px 16px 0px rgba(0,0,0,0.08);
+  box-shadow: -8px -8px 16px 0px rgba(0, 0, 0, 0.12),
+    -8px 0px 16px 0px rgba(0, 0, 0, 0.08);
 }
-.main h2{
-    font-size: 1.2rem;
-    text-align: center;
-    font-weight: 400;
+.main h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 400;
 }
 
-/* Responsive styles */
+@media (max-width: 1024px) {
+  .outer_ServiceBox {
+    padding: 0rem 2rem;
+    height: auto;
+    margin-top: 0rem;
+    margin-bottom: 8rem;
+  }
+  .outer_ServiceBox h1 {
+    font-size: 2.6rem;
+  }
+  .Cont_serve {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  .main {
+    width: 80vw;
+    height: auto;
+  }
+  .main h2 {
+    font-size: 1.7rem;
+  }
+}
 @media (max-width: 768px) {
   .outer_ServiceBox {
     padding: 0rem 2rem;
@@ -53,11 +72,10 @@
   }
   .main {
     width: 80vw;
-    /* max-width: 350px; */
     height: auto;
     min-height: 14vh;
   }
-  .main h2{
+  .main h2 {
     font-size: 1.6rem;
   }
 }
@@ -65,9 +83,8 @@
 @media (max-width: 480px) {
   .outer_ServiceBox {
     padding: 0rem 0.5rem;
-    margin-top: -1rem;
+    margin-top: -3rem;
     margin-bottom: 5rem;
-    /* background: #000; */
   }
   .outer_ServiceBox h1 {
     font-size: 1.4rem;
@@ -79,7 +96,7 @@
     min-height: 10vh;
     border-radius: 15px;
   }
-  .Cont_serve{
+  .Cont_serve {
     margin-top: 2rem;
   }
   .main h2 {
@@ -89,7 +106,6 @@
 }
 @media (max-width: 390px) {
   .outer_ServiceBox {
-    /* background: #000; */
     padding: 0rem 0.5rem;
     margin-top: -2rem;
     margin-bottom: 4rem;
@@ -104,7 +120,7 @@
     min-height: 10vh;
     border-radius: 15px;
   }
-  .Cont_serve{
+  .Cont_serve {
     margin-top: 2rem;
   }
   .main h2 {

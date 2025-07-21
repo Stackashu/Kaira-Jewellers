@@ -6,91 +6,80 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import TestimonialCard from "../minicomponents/TestimonialCard";
 
 const testimonialsData = [
   {
-    name: "Kaira Advani", 
-    img: "https://randomuser.me/api/portraits/women/44.jpg",
-    stars: 5,
-    text: "Best Products ever bought."
-  }, 
-  {
     name: "Amit Sharma",
     img: "https://randomuser.me/api/portraits/men/32.jpg",
-    stars: 5,
-    text: "Best Products ever bought."
+    text: "Absolutely loved the craftsmanship ."
+  },
+  {
+    name: "Rahul Verma",
+    img: "https://randomuser.me/api/portraits/men/45.jpg",
+    text: "Fast delivery and beautiful packaging"
+  },
+  {
+    name: "Rahul Verma",
+    img: "https://randomuser.me/api/portraits/men/45.jpg",
+    text: "Fast delivery and beautiful packaging"
+  },
+  {
+    name: "Rahul Verma",
+    img: "https://randomuser.me/api/portraits/men/45.jpg",
+    text: "Fast delivery and beautiful packaging"
   },
   {
     name: "Priya Singh",
     img: "https://randomuser.me/api/portraits/women/65.jpg",
-    stars: 5,
-    text: "Best Products ever bought."
+    text: "The jewelry exceeded my expectations."
   },
   {
-    name: "Priya Singh",
-    img: "https://randomuser.me/api/portraits/women/65.jpg",
-    stars: 5,
-    text: "Best Products ever bought."
-  },
-  {
-    name: "Priya Singh",
-    img: "https://randomuser.me/api/portraits/women/65.jpg",
-    stars: 5,
-    text: "Best Products ever bought."
-  },
-  {
-    name: "Priya Singh",
-    img: "https://randomuser.me/api/portraits/women/65.jpg",
-    stars: 5,
-    text: "Best Products ever bought."
-  } 
+    name: "Meera Joshi",
+    img: "https://randomuser.me/api/portraits/women/23.jpg",
+    text: "Support was very helpful and friendly."
+  }
 ];
 
 const Testimonials = () => {
   return (
-    <div className={style.testimonials_main}>
-      <div className={`${style.blur_bubble} ${style.b1}`}></div>
-      <div className={`${style.blur_bubble} ${style.b2}`}></div>
-      <div className={`${style.blur_bubble} ${style.b3}`}></div>
-
-      <div className={style.testimonials}>
-        <h1>Testimonials</h1>
-      </div>
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay, Scrollbar]}
-        slidesPerView={1}
-        navigation
+    <div className={style.test_Cont}>
+      <div className={`${style.bubble} ${style.b1}`}></div>
+      <div className={`${style.bubble} ${style.b2}`}></div>
+      <div className={`${style.bubble} ${style.b3}`}></div>
+      <h1>Testimonials</h1>
+        <Swiper
+        modules={[ Pagination, Autoplay]}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3500, disableOnInteraction: false }}
-        // scrollbar={{ draggable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        loop={true}
+        spaceBetween={20}
         breakpoints={{
-          480: { slidesPerView: 1 ,spaceBetween:0},
-          768: { slidesPerView: 2,spaceBetween: 0 },
-          1024: { slidesPerView: 3,spaceBetween:30 },
+          // when window width is >= 0px
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          // when window width is >= 640px (tablet)
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          // when window width is >= 1024px (desktop)
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 80,
+          },
         }}
-        className={style.testimonials_boxes_wrapper}
-        // style={{ padding: "3rem 1rem" }}
+        className={style.swiper}
       >
         {testimonialsData.map((testimonial, idx) => (
           <SwiperSlide key={idx}>
-            <div className={style.testimonials_boxes}>
-              <img
-                src={testimonial.img}
-                alt={testimonial.name}
-                className={style.testimonials_img}
-              />
-              <div className={style.testimonial_content}>
-                <h1 className={style.testimonial_name}>{testimonial.name}</h1>
-                <div className={style.testimonial_stars}>
-                  {[...Array(testimonial.stars)].map((_, i) => (
-                    <svg key={i} width="28" height="28" viewBox="0 0 20 20" fill="#FFD700" xmlns="http://www.w3.org/2000/svg" style={{marginRight: 2}}>
-                      <polygon points="10,1.5 12.6,7.5 19,8 14,12.2 15.5,18.3 10,15 4.5,18.3 6,12.2 1,8 7.4,7.5" />
-                    </svg>
-                  ))}
-                </div>
-                <p className={style.testimonial_text}>{testimonial.text}</p>
-              </div>
-            </div>
+            <TestimonialCard
+              name={testimonial.name}
+              img={testimonial.img}
+              text={testimonial.text}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -99,4 +88,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-

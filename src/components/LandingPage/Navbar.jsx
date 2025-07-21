@@ -9,7 +9,7 @@ const nav = [
   {name:"Stores",link:"/stores"},
   {name:"Franchise",link:"/Franchise"},
   {name:"Customize Product",link:"Customization"},
-  {name:"Franchise",link:"FranchiseEnq"}
+  {name:"Franchise Enquiry",link:"FranchiseEnq"}
  
 ]; 
 
@@ -64,6 +64,8 @@ const Navbar = () => {
                   }}
                 >
                   {item.name}
+                  <span className={style.left}></span>
+                  <span className={style.right}></span>
                 </li>
               </div>
             ))}

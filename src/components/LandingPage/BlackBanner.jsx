@@ -11,7 +11,7 @@ import img8 from "../../assets/Images/BlackLayout/img8.jpg";
 import img9 from "../../assets/Images/BlackLayout/img9.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+ 
 gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {

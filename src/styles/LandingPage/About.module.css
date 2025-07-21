@@ -1,14 +1,15 @@
 .about_Container {
-  background: linear-gradient(120deg, rgba(255, 182, 193, 0.35) 20%, transparent 100%);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 182, 193, 0.35) 20%,
+    transparent 100%
+  );
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
   padding: 3rem 2rem;
-  /* background: #000; */
   position: relative;
-  /* Add top and bottom shadow for smooth transition */
-  box-shadow:
-    0 -30px 40px 20px rgba(255, 182, 193, 0.2),   /* top shadow */
-    0 30px 40px 20px rgba(255, 182, 193, 0.2);    /* bottom shadow */
+  box-shadow: 0 -30px 40px 20px rgba(255, 182, 193, 0.2),
+    0 30px 40px 20px rgba(255, 182, 193, 0.2);
 }
 
 .about {
@@ -18,11 +19,10 @@
 }
 
 .bottom_Container {
-  /* background: red; */
-  padding: 0rem 8rem; 
+  padding: 0rem 8rem;
 }
 .bottom_Container p {
-  width: 50%; 
+  width: 60%;
   font-size: 1.8rem;
   font-weight: 600;
   color: rgba(108, 108, 108, 1);
@@ -30,7 +30,6 @@
 
 .Counting {
   display: flex;
-  /* background: yellow; */
   border-radius: 25px;
   border: 1px solid rgb(201, 197, 197);
   width: 30%;
@@ -44,7 +43,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: -2rem;
-  align-items: start; /* gap: 1px; */
+  align-items: start;
 }
 .num {
   font-size: 3rem;
@@ -57,8 +56,37 @@
   margin-top: -3rem;
 }
 
-/* Responsive styles for tablet */
-@media (max-width: 786px) {
+@media (max-width: 1024px) {
+  .about_Container {
+    padding: 2rem 1rem;
+    height: auto;
+  }
+  .about {
+    font-size: 3rem;
+  }
+  .bottom_Container {
+    margin-top: 50%;
+    padding: 0rem 2rem;
+  }
+  .bottom_Container p {
+    width: 100%;
+    font-size: 1.8rem;
+  }
+  .Counting {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  .num {
+    font-size: 2.5rem;
+  }
+  .text {
+    font-size: 1.2rem;
+    margin-top: -2rem;
+  }
+}
+
+@media (max-width: 800px) {
   .about_Container {
     padding: 2rem 1rem;
   }
@@ -75,7 +103,7 @@
   }
   .Counting {
     width: 100%;
-    padding: 1rem ;
+    padding: 1rem;
     font-size: 1rem;
   }
   .num {
@@ -87,13 +115,9 @@
   }
 }
 
-
-/* Responsive styles for mobile */
 @media (max-width: 468px) {
   .about_Container {
     padding: 1.2rem 0.5rem;
-    min-height: unset;
-    /* background: #000;; */
   }
   .about {
     font-size: 1.4rem;
@@ -108,7 +132,6 @@
   }
   .Counting {
     width: 95%;
-    /* flex-direction: ; */
     gap: 0.7rem;
     padding: 0.7rem 0.2rem;
     font-size: 0.95rem;
@@ -126,11 +149,9 @@
   }
 }
 
-/* Responsive styles for mobile */
 @media (max-width: 390px) {
   .about_Container {
     padding: 1.2rem 0.5rem;
-    min-height: unset;
   }
   .about {
     font-size: 1.4rem;
@@ -144,7 +165,6 @@
   }
   .Counting {
     width: 95%;
-    /* flex-direction: ; */
     gap: 0.7rem;
     padding: 0.7rem 0.2rem;
     font-size: 0.95rem;

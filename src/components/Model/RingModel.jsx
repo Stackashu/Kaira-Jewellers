@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import gsap from "gsap";
+import style from "../../styles/LandingPage/RingModel.module.css"
 
 const RingModel = ({ mainContainer }) => {
   const mountRef = useRef(null);
@@ -12,7 +13,12 @@ const RingModel = ({ mainContainer }) => {
   const sceneRef = useRef(null);
   const dracoLoaderRef = useRef(null);
   const envMapRef = useRef(null);
-
+ useEffect(() => {
+   console.log(window.innerWidth)
+ 
+   
+ }, [])
+ 
   // Helper to resize renderer and camera
   const handleResize = () => {
     if (!mountRef.current || !rendererRef.current || !cameraRef.current) return;
@@ -24,12 +30,9 @@ const RingModel = ({ mainContainer }) => {
   };
 
   useEffect(() => {
-    // Scene setup
     const scene = new THREE.Scene();
-    scene.background = null;
     sceneRef.current = scene;
 
-    // Camera setup
     const camera = new THREE.PerspectiveCamera(
       45,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
@@ -39,7 +42,6 @@ const RingModel = ({ mainContainer }) => {
     camera.position.set(0, 1, 5);
     cameraRef.current = camera;
 
-    // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, logarithmicDepthBuffer: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Slightly higher for clarity
     renderer.setSize(
@@ -65,14 +67,12 @@ const RingModel = ({ mainContainer }) => {
         (texture) => {
           texture.mapping = THREE.EquirectangularReflectionMapping;
           scene.environment = texture;
-          // scene.background = texture; // Make HDRI visible in background
           envMap = texture;
           envMapRef.current = envMap;
         }
       );
 
-    // Lighting - enhanced for realism
-    // Main top directional light (casts shadow)
+    // Lighting setup
     const topLight = new THREE.DirectionalLight(0xffffff, 1.7);
     topLight.position.set(0, 10, 0);
     topLight.castShadow = true;
@@ -86,27 +86,22 @@ const RingModel = ({ mainContainer }) => {
     topLight.shadow.camera.bottom = -10;
     scene.add(topLight);
 
-    // Soft fill light from the front
     const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
     fillLight.position.set(0, 3, 6);
     fillLight.castShadow = false;
     scene.add(fillLight);
 
-    // Subtle ambient light for soft shadow fill
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.22);
     scene.add(ambientLight);
 
-    // Rim light for extra sparkle
     const rimLight = new THREE.PointLight(0xffffff, 0.5, 20);
     rimLight.position.set(-5, 5, 5);
     scene.add(rimLight);
 
-    // Draco Loader setup
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
     dracoLoaderRef.current = dracoLoader;
 
-    // GLTF Loader with Draco
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
@@ -115,17 +110,13 @@ const RingModel = ({ mainContainer }) => {
       (gltf) => {
         const ringModel = gltf.scene;
 
-        // --- ENHANCEMENT: Material and mesh improvements ---
-
-        // Traverse and enhance materials
+        // Traverse and enhance materials for realism
         ringModel.traverse((child) => {
           if (child.isMesh) {
             child.castShadow = true;
             child.receiveShadow = true;
             if (child.material) {
-              // Ensure only front side is rendered (no double side)
               child.material.side = THREE.FrontSide;
-              // Enhance metalness/roughness for more realistic gold/silver
               if ("metalness" in child.material) child.material.metalness = 1;
               if ("roughness" in child.material) child.material.roughness = 0.18;
               if ("envMapIntensity" in child.material) child.material.envMapIntensity = 1.5;
@@ -134,25 +125,39 @@ const RingModel = ({ mainContainer }) => {
           }
         });
 
-
-        // Determine viewport width to set different values for desktop/tablet/mobile
         const vw = window.innerWidth;
-        // Add axes helper to visualize model axes (for debugging)
-        const axesHelper = new THREE.AxesHelper(2);
-        // ringModel.add(axesHelper);
 
-        // Default (desktop)
         let initialPos = { x: -2, y: 1, z: 6 };
-        let initialScale = { x: 17, y: 17, z: 17 };
+        let initialScale = { x: 16.5, y: 16.5, z: 16.5 };
         let initialRot = {  x: Math.PI / 2 * 0.7, y: Math.PI / 2 * 1.6, z: 0  };
         let toAnimatePos = { x: -1.8, y: 0.7, z: 0 };
         let toAnimateRot = { x:Math.PI/2*0.8,y:Math.PI/2 * 0.3, z: -Math.PI/ 2 * 0.1 };
-        let scrollToPos = { x: 1.5, y: 1.3,z:0.5 };
-        let scrollToScale = { x: 17, y: 17, z: 17 };
+        let scrollToPos = { x: 1.5, y: 1,z:0.5 };
+        let scrollToScale = { x: 16, y: 16, z: 16 };
         let scrollToRot = { y: (Math.PI / 2) * 2.5, x: Math.PI / 2  };
-
-        // Tablet
-        if (vw <= 900 && vw > 600) {
+        
+        if (vw<=1300) {
+          initialPos = { x: -1, y: 2, z: 4.5 };
+          initialScale = { x: 17, y: 17, z:17 };
+          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
+          toAnimatePos = { x: -0.8, y: 1.1, z: 0 };
+          toAnimateRot = { x:Math.PI/2 * 0.9,y:0,z:Math.PI/2 * 0.1 };
+          scrollToPos = { x: 1.1, y: 0.9,z:0.5 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0 };
+        }
+      
+        if (vw<=1024) {
+          initialPos = { x: -1, y: 2, z: 4.5 };
+          initialScale = { x: 15, y: 15, z:15 };
+          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
+          toAnimatePos = { x: 0.2, y: 1.4, z: 0 };
+          toAnimateRot = { x:Math.PI/2 * 0.9,y:0,z:Math.PI/2 * 0.1 };
+          scrollToPos = { x: 0, y: 1, z: 0 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0 };
+        }
+        if (vw<=768) {
           initialPos = { x: -1, y: 2, z: 4.5 };
           initialScale = { x: 15, y: 15, z:15 };
           initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
@@ -165,32 +170,31 @@ const RingModel = ({ mainContainer }) => {
 
         if (vw <= 480) {
           initialPos = { x: -0.5, y: 2, z: 4 };
-          initialScale = { x: 14, y: 14, z: 14 };
+          initialScale = { x: 12, y: 12, z: 12 };
           initialRot = { x: 0, y: 0, z: 0 };
-          toAnimatePos = { x: 0.1, y: 1.8, z: 0 };
+          toAnimatePos = { x: 0, y: 1.8, z: 0 };
           toAnimateRot = { x: Math.PI / 2, y: 0, z:  0 };
-          scrollToPos = { x: 0, y: 0.9, z: 0 };
-          scrollToScale = { x: 13, y: 13, z: 13 };
+          scrollToPos = { x: 0, y: 0.8, z: 0 };
+          scrollToScale = { x: 12, y: 12, z: 12 };
           scrollToRot = {y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0  };
         }
         if (vw <= 390) {
           initialPos = { x: -0.5, y: 2, z: 4 };
-          initialScale = { x: 14, y: 14, z: 14 };
+          initialScale = { x: 13, y: 13, z: 13 };
           initialRot = { x: 0, y: 0, z: 0 };
-          toAnimatePos = { x: 0.1, y: 1.8, z: 0 };
+          toAnimatePos = { x: 0, y: 1.8, z: 0 };
           toAnimateRot = { x: Math.PI / 2, y: 0, z:  0 };
           scrollToPos = { x: 0, y: 1.3, z: 0 };
-          scrollToScale = { x: 15, y: 15, z: 15 };
+          scrollToScale = { x: 14, y: 14, z: 14 };
           scrollToRot = {y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0  };
         }
 
-        // Set initial position, scale, and rotation using initial values
         ringModel.position.set(initialPos.x, initialPos.y, initialPos.z);
         ringModel.scale.set(initialScale.x, initialScale.y, initialScale.z);
         ringModel.rotation.set(initialRot.x, initialRot.y, initialRot.z);
         scene.add(ringModel);
 
-        // Animate the model smoothly from its initial position to the "toAnimatePos" AND rotate in y axis in sync
+        // Animate the model smoothly from its initial position to the "toAnimatePos" and rotation
         gsap.to(
           ringModel.position,
           {
@@ -207,7 +211,7 @@ const RingModel = ({ mainContainer }) => {
             duration: 2,
             ease: "power2.inOut",
             onComplete: () => {
-              // Only start scrollTrigger timeline after initial animation is done
+              // Start scrollTrigger timeline after initial animation
               var tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: mainContainer.current,
@@ -251,20 +255,14 @@ const RingModel = ({ mainContainer }) => {
       }
     );
 
-  
     const animate = () => {
       requestAnimationFrame(animate);
-
-     
-
       renderer.render(scene, camera);
     };
     animate();
 
-    // Responsiveness: Add resize handler
     window.addEventListener("resize", handleResize);
 
-    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
       if (rendererRef.current) {
@@ -288,15 +286,8 @@ const RingModel = ({ mainContainer }) => {
   }, []);
 
   return (
-    <div
+    <div className={style.Canvas_box}
       ref={mountRef}
-      style={{
-        width: "100%",
-        height: "90vh",
-        position: "",
-        background: "transparent",
-        pointerEvents: "auto",
-      }}
     ></div>
   );
 };

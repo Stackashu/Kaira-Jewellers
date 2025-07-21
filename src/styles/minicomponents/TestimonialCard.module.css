@@ -1,0 +1,107 @@
+.card_Cont {
+  /* background: green; */
+  padding: 3rem 1rem 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 50vh; */
+}
+.card_Wrapper {
+  border-radius: 5px;
+  background: white;
+  /* height: 15vh; */
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  gap: 1.8rem;
+  align-items: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+}
+
+.left {
+  width: 25%;
+  background: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.left img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.right {
+  /* background: rgb(88, 72, 72);/ */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.stars{
+    margin: 0;
+    padding: 0;
+}
+.stars div {
+  display: flex;
+  gap: 0.3rem;
+  /* border: 1px solid black; */
+}
+
+.stars div svg {
+  width: 20px;
+  height: 20px;
+}
+
+.right h1 {
+  /* border: 1px solid black; */
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.right h2 {
+   width: 90%;
+  /* border: 1px solid black; */
+  color: gray;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+@media(max-width: 1024px){
+    .card_Cont{
+        padding: 3rem  2rem;
+    }
+    .card_Wrapper{
+        flex-direction: column;
+    }
+    .left{
+        width: 70%;
+    }
+    .right{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .right h2{
+        text-align:center;
+    }
+}
+@media(max-width: 480px){
+    .card_Cont{
+        padding: 3rem  1rem;
+    }
+    .card_Wrapper{
+        flex-direction: row;
+    }
+}

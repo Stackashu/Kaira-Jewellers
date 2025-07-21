@@ -36,14 +36,14 @@ const Hero = () => {
 
         <div className={style.Button_box}>
           <div className={style.Button_Wrapper}>
-            <svg
+            {/* <svg
               className={style.arrow_Down}
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <rect width="30" height="30" rx="6" fill="#fff" />
-              {/* Vertical line */}
+            
               <line
                 x1="16"
                 y1="8"
@@ -53,7 +53,7 @@ const Hero = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
               />
-              {/* Arrow down */}
+              
               <path
                 d="M10 18l6 6 6-6"
                 stroke="#000"
@@ -61,7 +61,7 @@ const Hero = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-            </svg>
+            </svg> */}
             <h1>EXPLORE</h1>
           </div>
         </div>

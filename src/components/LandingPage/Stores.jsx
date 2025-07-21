@@ -28,7 +28,10 @@ const Stores = () => {
 
     // Use gsap.utils.toArray to ensure a clean array of elements
     const boxes = boxRefs.current.filter(Boolean);
-
+    let startValue = "top 40%"
+    if(window.innerWidth<=780){
+      startValue="top 60%"
+    }
     // Animate each box with a more natural stagger and slight overlap
     gsap.fromTo(
       boxes,
@@ -52,7 +55,7 @@ const Stores = () => {
         },
         scrollTrigger: {
           trigger: outerBoxRef.current,
-          start: "top 40%",
+          start: startValue,
           toggleActions: "play none none reverse",
           // markers: true, // Show markers for debugging
         },

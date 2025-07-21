@@ -1,335 +1,121 @@
-/* Testimonials styles */ 
-.testimonials_main {
-    width: 100%;
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    
-    align-items: center;
+.test_Cont {
+    padding: 0 2rem;
+    /* margin-top: 3rem; */
     position: relative;
     overflow: hidden;
 }
 
-.testimonials {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}  
-.testimonials h1{
-    
-    font-size: 3rem;
+.test_Cont h1 {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
     font-weight: 500;
 }
 
-.testimonials_boxes_wrapper {
-    display: flex; 
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 1.2rem; /* Reduced from 3rem */
-    width: 100%;
-    margin-top: 1rem;
-    padding: 3rem 1rem;
-}
-
-.testimonials_boxes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 8px 8px rgba(0,0,0,0.08);
-    padding: 1rem 1.5rem;
-    /* gap: 1.2rem; */
-    min-width: 250px;
-    max-width: 320px;
-    margin-left: 3.2rem;
-    transition: transform 0.2s;
-    
-}
-
-.testimonials_boxes:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 12px 12px rgba(0,0,0,0.10);
-}
+.bubble {
+    position: absolute;
    
-
-
-/* Swiper pagination dots for better touch usability */
-.swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background: #bfa14a;
-  opacity: 0.7;
-}
-.swiper-pagination-bullet-active {
-  background: #222;
-  opacity: 1;
-}
-
-.testimonials_img {
-    width: 80px;
-    height: 80px;
+    background: rgb(255, 245, 247);
     border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-    flex-shrink: 1;
-    margin-right: 2rem;
-}
-
-.testimonial_content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: transparent;
-    border-radius: 8px;
-    padding: 0;
-    box-shadow: none;
-    flex: 1;
-}
-
-.testimonial_content h1 {
-    margin: 0;
-    font-size: 1.15rem;
-    font-weight: 600;
-}
-.testimonial_title h2{
-    font-size: 1.2rem;
-    margin-top: 6rem;
-    font-weight: 500;
-
-}
-.testimonial_stars {
-    color: #FFD700;
-    font-size: 1rem;
-    margin-top: 0.6rem; 
-}
-
-.testimonial_content p {
-    margin: 0.2rem 0 0 0;
-    font-size: 0.8rem;
-    color: #a39a9a;
-    font-weight: 600;
-}
-.testimonial_title{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    z-index: 1;
+    pointer-events: none;
+    /* Add a subtle blur for a soft bubble effect */
     
 }
 
-.sliderRow {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
+.b1 {
+    left: 0%;
+    top: -20%;
+    width: 300px;
+    height: 300px;
 }
-
-.arrowBtn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    margin: 0 1rem;
-    display: flex;
-    align-items: center;
-    padding: 0;
-    /* Make the button transition slower for visual feedback */
-    transition: 0.4s ease;
-}
-.arrowBtn:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.testimonial_name {
-    font-size: 1.2rem;
-    margin: 0;
-    font-weight: 600;
-}
-
-.testimonial_text {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #a39a9a;
-    font-weight: 600;
-}
-
-.blur_bubble {
- width: 300px;
- height: 300px;
- position: absolute;
- background: rgba(238, 182, 192, 0.17);
- border-radius: 50%;
- z-index: -1;
-}
-
-.b1{
-    top: -2%;
-    left: 5%;
-}
-
 .b2{
-    
-    bottom: -15%;
-    right: 10%;
-}
-
-.b3{
     width: 100px;
     height: 100px;
-    top: 0;
     right: 10%;
+    top: -5%;
+}
+.b3{
+    width: 250px;
+    height: 250px;
+    right: 5%;
+    bottom: -3%;
 }
 
-@media (max-width: 786px) {
-  .blur_bubble {
-    width: 140px;
-    height: 140px;
-    top: 50%;
-    left: 5%;
-    filter: blur(40px);
-  }
-}
-@media (max-width: 480px) {
-  .blur_bubble {
-    width: 90px;
-    height: 90px;
-    top: 60%;
-    left: 2%;
-    filter: blur(25px);
-  }
-}
-
-@media (max-width:786px){
-    .testimonials h1{
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .test_Cont {
+        padding: 0 2rem;
+        /* margin-top: 2.5rem; */
+    }
+    .test_Cont h1 {
         font-size: 2.2rem;
-        /* margin-left: 4rem; */
+        z-index: 2;
     }
-    .testimonials_boxes{
-        /* background: red; */
-        width: 35vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 1.5rem;
-        gap: 1rem;
+    .b1 {
+        left: 0%;
+        top: -5%;
+        width: 300px;
+        height: 300px;
     }
-    .testimonials_img {
-        width: 70%;
-        height: 70%;
-        margin-left: 2.5rem;
-        
+    .b2{
+        width: 200px;
+        height: 200px;
+        right: 0%;
+        top: 0%;
     }
-    .testimonials_boxes_wrapper {
-        display: flex; 
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-evenly;
-        gap: 1.2rem; /* Reduced from 3rem */
-        width: 100%;
-        margin-top: 1rem;
-        /* background: #000; */
-    }
-    .testimonial_content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-    }
-    .testimonial_content h1{
-        font-size: 1.3rem;
-        font-weight: 400;
-    }
-    .testimonial_content p {
-        font-size: .8rem;
-        font-weight: bold;
-        
+    .b3{
+        width: 300px;
+        height: 300px;
+        right: 0;
+        bottom: 0;
     }
 }
 
-
-@media (max-width:480px){
-    .testimonials_main{
+@media (max-width: 768px) {
+    .test_Cont {
+        padding: 0 1.2rem;
         margin-top: 2rem;
     }
-    .testimonials h1{
-        font-size: 1.3rem;
-        /* margin-left: .2rem; */
+    .test_Cont h1 {
+        font-size: 1.8rem;
     }
-    .testimonials_boxes{
-        width:60%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-left: 5rem;
-    }
-    .testimonials_boxes_wrapper {
-        display: flex; 
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding:  3rem 0rem;
-        
-    }
-    .testimonials_img {
-        width: 60%;
-        height: 60%;
-        margin-left: 2.5rem;
-    }
-    .testimonial_content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-    }
-   
 }
 
-@media (max-width:390px){
-    .testimonials h1{
+@media (max-width: 490px) {
+    .test_Cont {
+        padding: 0 0.5rem;
+        margin-top: 1.2rem;
+    }
+    .test_Cont h1 {
         font-size: 1.3rem;
-        /* margin-left: 1.1rem; */
     }
-    .testimonials_boxes{
-        width:60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-left: 4rem;
+    .b1 {
+        left: 0%;
+        top: -5%;
+        width: 100px;
+        height: 100px;
     }
-    .testimonials_boxes_wrapper {
-        display: flex; 
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding:  3rem 0rem;
-        
+    .b2{
+        width: 100px;
+        height: 100px;
+        right: 0%;
+        top: 0%;
     }
-    
-    .testimonials_img {
-        width: 50%;
-        height: 50%;
-        margin-left: 2.5rem;
+    .b3{
+        width: 150px;
+        height: 150px;
+        right: 0;
+        bottom: 0;
     }
-    .testimonial_content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
+}
+
+@media (max-width: 390px) {
+    .test_Cont {
+        padding: 0 ;
+        /* margin: 0.8rem 1rem; */
     }
-    .testimonial_content h1{
-        font-size: 1.3rem;
-        font-weight: 400;
-     }
+    .test_Cont h1 {
+        font-size: 1.5rem;
+    }
 }
