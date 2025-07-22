@@ -8,11 +8,12 @@ import RingModel from "../Model/RingModel.jsx";
 const AnimationCompo = () => {
     const mainContainer = useRef(null)
     const location = useLocation();
+    const uniqueKey = `${location.pathname}-${location.state?.key || location.key}`;
  
   return (
     <div ref={mainContainer} className={style.Model_Container}>
       <div className={style.Animation_box}>
-        <RingModel key={location.key} mainContainer={mainContainer} />
+        <RingModel key={uniqueKey} mainContainer={mainContainer} />
       </div>
       <div style={{position:"absolute",top:"0",right:"0"}}>
       <Hero />

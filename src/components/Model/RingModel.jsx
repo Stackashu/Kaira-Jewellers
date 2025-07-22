@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import gsap from "gsap";
 import style from "../../styles/LandingPage/RingModel.module.css"
+import { ContactCon } from "../../Context/ContactContext";
 
 const RingModel = ({ mainContainer }) => {
+  const{mountModel} = useContext(ContactCon)
   const mountRef = useRef(null);
   const rendererRef = useRef(null);
   const cameraRef = useRef(null);
@@ -279,7 +281,7 @@ const RingModel = ({ mainContainer }) => {
         envMapRef.current.dispose();
       }
     };
-  }, []);
+  }, [mountModel]);
 
   return (
     <div className={style.Canvas_box}

@@ -99,7 +99,7 @@
   margin-top: 12px;
   width: 100%;
   padding: 12px;
-  background-color: #111;
+  background-color: #2d1515;
   color: #fff;
   border: none;
   border-radius: 18px;
@@ -111,7 +111,7 @@
   transition: background 0.2s, box-shadow 0.2s;
 }
 .submitButton:hover {
-  background-color: #b48a9c;
+  background-color: #3c2525;
   color: #fff;
   box-shadow: 0 4px 16px rgba(180,138,156,0.18);
 }
@@ -121,7 +121,7 @@
   .formContainer {
     width: 90vw;
     max-width: 98vw;
-    padding: 18px 10px;
+    padding: 18px 10px; 
   }
   .row {
     gap: 10px;

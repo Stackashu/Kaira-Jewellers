@@ -118,7 +118,7 @@
 .States_Wrapper {
   width: 100%;
   display: flex;
-  background: rgb(0, 0, 0);
+  background: rgb(255, 244, 245);
   justify-content: center;
   overflow: hidden;
   position: relative;
@@ -135,7 +135,7 @@
   animation: marquee-tofro 5s ease-in-out infinite alternate;
 }
 .States h2 {
-  color: white;
+  color: rgb(255, 179, 179);
 }
 @keyframes marquee-tofro {
   0% {
@@ -247,7 +247,7 @@
 .tagline {
   margin-top: 2rem;
   font-weight: 600;
-  color: #0056d2;
+  color: #333;
   font-size: 1.1rem;
 }
 

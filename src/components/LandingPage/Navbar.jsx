@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "../../styles/LandingPage/Navbar.module.css";
 import headeLogo from "../../assets/Images/KairaLogo.png";
 import { useNavigate } from "react-router-dom";
-// import gsap from "gsap";
+import  { ContactCon } from "../../Context/ContactContext";
+
 
 const nav = [
   {name:"Home",link:"/"},
@@ -14,6 +15,8 @@ const nav = [
 ]; 
 
 const Navbar = () => {
+  const {isOpen,setIsOpen,mountModel,setMountModel} = useContext(ContactCon)
+  
   const navigate = useNavigate(null)
   const navBarRef = useRef(null);
   const [isTrayOpen, setIsTrayOpen] = useState(false);
@@ -56,7 +59,7 @@ const Navbar = () => {
             {nav.map((item, idx) => (
               <div key={idx} >
                 <li
-                  onClick={() => {setActiveIdx(idx); setIsTrayOpen(false); navigate(`${item.link}`) }}
+                  onClick={() => { if(item.name==="Home"){ setMountModel(true)}setActiveIdx(idx); setIsTrayOpen(false); navigate(`${item.link}`) }}
                   style={{
                     color: activeIdx === idx ? "rgb(179, 100, 100)" : "",
                     fontWeight: activeIdx === idx ? "bold" : "normal",
@@ -73,7 +76,7 @@ const Navbar = () => {
         </div>
 
         <div className={style.nav_RightBox}>
-          <div className={style.Contact}>
+          <div className={style.Contact} onClick={()=>setIsOpen(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className={style.telephone_Svg}
