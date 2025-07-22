@@ -4,9 +4,10 @@ import LandingPage from "../Layout/LandingPage";
 import Stores from "../pages/Stores";
 import Franchise from "../pages/Franchise";
 import CustomizeProduct from "../pages/CustomizeProduct";
-import FranchiseEnq from "../pages/FranchiseEnq";
+
 
 import MainCont from "../pages/MainCont";
+import Gallery from "../components/LandingPage/Collection";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         element: <MainCont />,
       },
       {
+        path: "Gallery",
+        element: <Gallery/>,
+      },,
+      {
         path: "Stores",
         element: <Stores />,
       },
@@ -28,11 +33,7 @@ const router = createBrowserRouter([
       {
         path: "Customization",
         element: <CustomizeProduct />,
-      },
-      {
-        path: "FranchiseEnq",
-        element: <FranchiseEnq />,
-      },
+      }
     ],
   },
 ]);

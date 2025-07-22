@@ -1,33 +1,43 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "../../styles/LandingPage/Navbar.module.css";
 import headeLogo from "../../assets/Images/KairaLogo.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import  { ContactCon } from "../../Context/ContactContext";
-
 
 const nav = [
   {name:"Home",link:"/"},
   {name:"Stores",link:"/stores"},
+  {name:"Gallery",link:"/Gallery"},
   {name:"Franchise",link:"/Franchise"},
-  {name:"Customize Product",link:"Customization"},
-  {name:"Franchise Enquiry",link:"FranchiseEnq"}
- 
+  {name:"Customize Product",link:"/Customization"},
 ]; 
 
 const Navbar = () => {
   const {isOpen,setIsOpen,mountModel,setMountModel} = useContext(ContactCon)
-  
   const navigate = useNavigate(null)
+  const location = useLocation();
   const navBarRef = useRef(null);
   const [isTrayOpen, setIsTrayOpen] = useState(false);
 
-  // const crossRef = useRef(null)
-  const [activeIdx, setActiveIdx] = useState(0);
+  // Set activeIdx based on current path
+  const getActiveIdx = (pathname) => {
+    const foundIdx = nav.findIndex(item => {
+      // Normalize both for trailing slashes and case
+      return item.link.replace(/\/$/, '').toLowerCase() === pathname.replace(/\/$/, '').toLowerCase();
+    });
+    return foundIdx === -1 ? 0 : foundIdx;
+  };
+
+  const [activeIdx, setActiveIdx] = useState(() => getActiveIdx(location.pathname));
+
+  useEffect(() => {
+    setActiveIdx(getActiveIdx(location.pathname));
+  }, [location.pathname]);
+
   return (
     <header className={style.header_OuterBox}>
       <div className={style.header_InnerBox}>
         <img src={headeLogo} alt="Kaira Jewellers" />
-
         <div ref={navBarRef}  className={`${style.nav_Wrapper} ${isTrayOpen ? style.nav_WrapperOpen : style.nav_WrapperClose } `}>
           <svg
             onClick={() => setIsTrayOpen(false)}
@@ -36,30 +46,14 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             className={style.cross_Nav}
           >
-            <line
-              x1="6"
-              y1="6"
-              x2="18"
-              y2="18"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <line
-              x1="18"
-              y1="6"
-              x2="6"
-              y2="18"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
+            <line x1="6" y1="6" x2="18" y2="18" stroke="black" strokeWidth="2" strokeLinecap="round" />
+            <line x1="18" y1="6" x2="6" y2="18" stroke="black" strokeWidth="2" strokeLinecap="round" />
           </svg>
           <nav className={style.nav}>
             {nav.map((item, idx) => (
               <div key={idx} >
                 <li
-                  onClick={() => { if(item.name==="Home"){ setMountModel(true)}setActiveIdx(idx); setIsTrayOpen(false); navigate(`${item.link}`) }}
+                  onClick={() => { if(item.name==="Home"){ setMountModel(true)} setIsTrayOpen(false); navigate(`${item.link}`) }}
                   style={{
                     color: activeIdx === idx ? "rgb(179, 100, 100)" : "",
                     fontWeight: activeIdx === idx ? "bold" : "normal",
@@ -74,7 +68,6 @@ const Navbar = () => {
             ))}
           </nav>
         </div>
-
         <div className={style.nav_RightBox}>
           <div className={style.Contact} onClick={()=>setIsOpen(true)}>
             <svg
@@ -99,30 +92,9 @@ const Navbar = () => {
               width="30"
               height="30"
             >
-              <rect
-                x="4"
-                y="6"
-                width="16"
-                height="2"
-                rx="1"
-                fill="rgb(187, 79, 79)"
-              />
-              <rect
-                x="4"
-                y="11"
-                width="16"
-                height="2"
-                rx="1"
-                fill="rgb(187, 79, 79)"
-              />
-              <rect
-                x="4"
-                y="16"
-                width="16"
-                height="2"
-                rx="1"
-                fill="rgb(187, 79, 79)"
-              />
+              <rect x="4" y="6" width="16" height="2" rx="1" fill="rgb(187, 79, 79)" />
+              <rect x="4" y="11" width="16" height="2" rx="1" fill="rgb(187, 79, 79)" />
+              <rect x="4" y="16" width="16" height="2" rx="1" fill="rgb(187, 79, 79)" />
             </svg>
           </div>
         </div>

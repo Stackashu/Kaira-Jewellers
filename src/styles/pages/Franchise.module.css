@@ -248,7 +248,55 @@
   margin-top: 2rem;
   font-weight: 600;
   color: #333;
-  font-size: 1.1rem;
+  font-size: 1.1rem; 
+}
+
+.franchiseQuoteRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding: 1.2rem 1.5rem;
+  background: #fff6fa;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(180,138,156,0.08);
+  flex-wrap: wrap;
+}
+.franchiseQuote {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #b48a9c;
+}
+.franchiseQuoteBtn {
+  background: #b48a9c;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(180,138,156,0.13);
+}
+.franchiseQuoteBtn:hover {
+  background: #2d1515;
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .franchiseQuoteRow {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding: 1rem 0.5rem;
+  }
+  .franchiseQuoteBtn {
+    width: 100%;
+    margin-top: 0.7rem;
+    padding: 0.7rem 0;
+    font-size: 1rem;
+  }
 }
 
 /* Responsive for <= 1024px */

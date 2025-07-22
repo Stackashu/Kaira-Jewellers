@@ -8,15 +8,17 @@ import { Outlet } from "react-router-dom";
 import ContactUs from "../pages/ContactUs.jsx";
 import { useContext } from "react";
 import { ContactCon } from "../Context/ContactContext";
+import FranchiseEnq from "../pages/FranchiseEnq.jsx"
 
 const LandingPage = () => {
   useScrollToTop();
-  const { isOpen } = useContext(ContactCon);
+  const { isOpen,openFranchiseForm } = useContext(ContactCon);
 
   return (
     <div className={style.LandingPage_cont}>
       <Navbar />
       {isOpen && <ContactUs />}
+      {openFranchiseForm && <FranchiseEnq/>}
       <Outlet />
       {/* <Catogories /> */}
       <Footer />

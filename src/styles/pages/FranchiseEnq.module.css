@@ -100,7 +100,7 @@
   width: 100%;
   padding: 12px;
   background-color: #2d1515;
-  color: #fff;
+  color: #fff; 
   border: none;
   border-radius: 18px;
   font-size: 1.08rem;
@@ -114,6 +114,50 @@
   background-color: #3c2525;
   color: #fff;
   box-shadow: 0 4px 16px rgba(180,138,156,0.18);
+}
+
+.blurBg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.formTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2d1515;
+  margin: 0;
+}
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b48a9c;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 8px;
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+.closeButton:hover {
+  color: #2d1515;
 }
 
 /* Responsive for <= 1024px */
