@@ -7,6 +7,7 @@
   border-radius: 20px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   transition: padding 0.2s, width 0.2s;
+  /* Remove any overflow/scroll from here, let blurBg handle it */
 }
 
 .form {
@@ -116,10 +117,11 @@
   box-shadow: 0 4px 16px rgba(180,138,156,0.18);
 }
 
+/* Make the blurBg take the full viewport and allow scrolling of its content */
 .blurBg {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
   width: 100vw;
   background: rgba(255, 255, 255, 0.6);
@@ -128,8 +130,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 10;
   pointer-events: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Make sure the scroll is on the blurBg, not the body */
+  height: 100vh;
+  /* Prevent body scroll when modal is open (handled in JS, but this helps) */
 }
 
 .headerRow {

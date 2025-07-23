@@ -1,11 +1,12 @@
 .carouselContainer {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 50vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   overflow: hidden;
+ 
 }
 
 .carouselImage {
@@ -15,14 +16,14 @@
   max-height: 600px;
   object-fit: cover;
   object-position: center center;
-}
+} 
 
 .leftArrow,
 .rightArrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -36,7 +37,10 @@
   align-items: center;
   justify-content: center;
 }
-
+.leftArrow svg, .rightArrow svg{
+  width: 24px;
+  height: 24px;
+}
 .leftArrow:hover,
 .rightArrow:hover {
   background: rgba(255, 255, 255, 0.9);

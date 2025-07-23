@@ -27,14 +27,6 @@ const ContactUs = () => {
               <label htmlFor="phone">Phone</label>
               <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
             </div>
-            <div className={style.inputGroup}>
-              <label htmlFor="state">State</label>
-              <select id="state" name="state" required>
-                <option value="">Select State</option>
-                <option value="haryana">Gurgaon</option>
-                <option value="noida">Noida</option>
-              </select>
-            </div>
           </div>
           <div className={style.row}>
             <div className={style.inputGroup}>

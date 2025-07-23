@@ -19,7 +19,7 @@ const Gallery = () => {
   
   return (
     <div className={style.outer_CollBox}>
-      <h1>Collections</h1>
+      
       <div className={style.photos_Wrapper}>
         {/* Row 1: Left to right */}
         <Swiper

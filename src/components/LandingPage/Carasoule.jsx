@@ -27,9 +27,17 @@ const Carasoule = () => {
 
   return (
     <div className={style.carouselContainer}>
-      <button className={style.leftArrow} onClick={prevSlide}>&lt;</button>
+      <button className={style.leftArrow} onClick={prevSlide} aria-label="Previous Slide">
+        <svg  viewBox="0 0 24 24" fill="none">
+          <polyline points="15 18 9 12 15 6" stroke="#222" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
       <img src={images[current]} alt={`carousel-img-${current + 1}`} className={style.carouselImage} />
-      <button className={style.rightArrow} onClick={nextSlide}>&gt;</button>
+      <button className={style.rightArrow} onClick={nextSlide} aria-label="Next Slide">
+        <svg  viewBox="0 0 24 24" fill="none">
+          <polyline points="9 6 15 12 9 18" stroke="#222" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
     </div>
   );
 }

@@ -4,10 +4,8 @@ import LandingPage from "../Layout/LandingPage";
 import Stores from "../pages/Stores";
 import Franchise from "../pages/Franchise";
 import CustomizeProduct from "../pages/CustomizeProduct";
-
-
 import MainCont from "../pages/MainCont";
-import Gallery from "../components/LandingPage/Collection";
+import GalleryShowCase from "../pages/GalleryShowCase";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: "Gallery",
-        element: <Gallery/>,
+        element: <GalleryShowCase/>,
       },,
       {
         path: "Stores",

@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-}
+} 
 .balls {
   width: 0;
   height: 0;
@@ -23,6 +23,7 @@
   justify-content: start;
   align-items: end;
   margin-top: -7rem;
+  z-index: 1;
 }
 
 .Hero_InnerBox h1 {
@@ -47,6 +48,7 @@
 .Button_box {
   margin-top: -3rem;
   position: relative;
+  padding: 0;
 }
 
 .Button_Wrapper {
@@ -54,7 +56,7 @@
   position: absolute;
   margin-right: 2rem;
   border-radius: 50px;
-  padding: 0.3rem 2rem;
+  padding: 0rem 2.5rem;
   gap: 15px;
   display: flex;
   border: 2px solid rgb(187, 79, 79);
@@ -64,7 +66,7 @@
 .Button_Wrapper h1 {
   color: rgb(187, 79, 79);
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .arrow_Down {
   width: 32px;

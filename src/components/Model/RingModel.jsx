@@ -4,20 +4,21 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import gsap from "gsap";
-import style from "../../styles/LandingPage/RingModel.module.css"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import style from "../../styles/LandingPage/RingModel.module.css";
 import { ContactCon } from "../../Context/ContactContext";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const RingModel = ({ mainContainer }) => {
-  const{mountModel} = useContext(ContactCon)
+  const { mountModel } = useContext(ContactCon);
   const mountRef = useRef(null);
   const rendererRef = useRef(null);
   const cameraRef = useRef(null);
   const sceneRef = useRef(null);
   const dracoLoaderRef = useRef(null);
   const envMapRef = useRef(null);
- 
- 
-  // Helper to resize renderer and camera
+
   const handleResize = () => {
     if (!mountRef.current || !rendererRef.current || !cameraRef.current) return;
     const width = mountRef.current.clientWidth;
@@ -41,7 +42,7 @@ const RingModel = ({ mainContainer }) => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, logarithmicDepthBuffer: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Slightly higher for clarity
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
     renderer.setSize(
       mountRef.current.clientWidth,
       mountRef.current.clientHeight
@@ -49,13 +50,13 @@ const RingModel = ({ mainContainer }) => {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
-    renderer.shadowMap.enabled = true; // Enable shadow maps for realism
+    renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     rendererRef.current = renderer;
 
     mountRef.current.appendChild(renderer.domElement);
 
-    // HDRI Environment Map
+    // HDRI
     let envMap = null;
     const rgbeLoader = new RGBELoader();
     rgbeLoader
@@ -70,7 +71,6 @@ const RingModel = ({ mainContainer }) => {
         }
       );
 
-    // Lighting setup
     const topLight = new THREE.DirectionalLight(0xffffff, 1.7);
     topLight.position.set(0, 10, 0);
     topLight.castShadow = true;
@@ -108,7 +108,6 @@ const RingModel = ({ mainContainer }) => {
       (gltf) => {
         const ringModel = gltf.scene;
 
-        // Traverse and enhance materials for realism
         ringModel.traverse((child) => {
           if (child.isMesh) {
             child.castShadow = true;
@@ -124,67 +123,62 @@ const RingModel = ({ mainContainer }) => {
         });
 
         const vw = window.innerWidth;
+        let initialPos, initialScale, initialRot, toAnimatePos, toAnimateRot, scrollToPos, scrollToScale, scrollToRot;
 
-        let initialPos = { x: -2, y: 1, z: 6 };
-        let initialScale = { x: 16.5, y: 16.5, z: 16.5 };
-        let initialRot = {  x: Math.PI / 2 * 0.7, y: Math.PI / 2 * 1.6, z: 0  };
-        let toAnimatePos = { x: -1.8, y: 0.7, z: 0 };
-        let toAnimateRot = { x:Math.PI/2*0.8,y:Math.PI/2 * 0.3, z: -Math.PI/ 2 * 0.1 };
-        let scrollToPos = { x: 1.5, y: 1,z:0.5 };
-        let scrollToScale = { x: 16, y: 16, z: 16 };
-        let scrollToRot = { y: (Math.PI / 2) * 2.5, x: Math.PI / 2  };
-        
-        if (vw<=1300) {
-          initialPos = { x: -1, y: 2, z: 4.5 };
-          initialScale = { x: 17, y: 17, z:17 };
-          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
-          toAnimatePos = { x: -0.8, y: 1.1, z: 0 };
-          toAnimateRot = { x:Math.PI/2 * 0.9,y:0,z:Math.PI/2 * 0.1 };
-          scrollToPos = { x: 1.1, y: 0.9,z:0.5 };
-          scrollToScale = { x: 16, y: 16, z: 16 };
-          scrollToRot = { y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0 };
-        }
-      
-        if (vw<=1024) {
-          initialPos = { x: -1, y: 2, z: 4.5 };
-          initialScale = { x: 15, y: 15, z:15 };
-          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
-          toAnimatePos = { x: 0.2, y: 1.4, z: 0 };
-          toAnimateRot = { x:Math.PI/2 * 0.9,y:0,z:Math.PI/2 * 0.1 };
-          scrollToPos = { x: 0, y: 1, z: 0 };
-          scrollToScale = { x: 16, y: 16, z: 16 };
-          scrollToRot = { y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0 };
-        }
-        if (vw<=768) {
-          initialPos = { x: -1, y: 2, z: 4.5 };
-          initialScale = { x: 15, y: 15, z:15 };
-          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5  };
-          toAnimatePos = { x: 0, y: 1.6, z: 0 };
-          toAnimateRot = { x:Math.PI/2 * 0.9,y:0,z:Math.PI/2 * 0.1 };
-          scrollToPos = { x: 0, y: 1.4, z: 0 };
-          scrollToScale = { x: 16, y: 16, z: 16 };
-          scrollToRot = { y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0 };
-        }
-
-        if (vw <= 480) {
-          initialPos = { x: -0.5, y: 2, z: 4 };
-          initialScale = { x: 12, y: 12, z: 12 };
-          initialRot = { x: 0, y: 0, z: 0 };
-          toAnimatePos = { x: 0, y: 1.8, z: 0 };
-          toAnimateRot = { x: Math.PI / 2, y: 0, z:  0 };
-          scrollToPos = { x: 0, y: 0.8, z: 0 };
-          scrollToScale = { x: 12, y: 12, z: 12 };
-          scrollToRot = {y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0  };
-        }
         if (vw <= 390) {
           initialPos = { x: -0.5, y: 2, z: 4 };
           initialScale = { x: 13, y: 13, z: 13 };
           initialRot = { x: 0, y: 0, z: 0 };
           toAnimatePos = { x: 0, y: 1.8, z: 0 };
-          toAnimateRot = { x: Math.PI / 2, y: 0, z:  0 };
+          toAnimateRot = { x: Math.PI / 2, y: 0, z: 0 };
           scrollToPos = { x: 0, y: 1.3, z: 0 };
           scrollToScale = { x: 14, y: 14, z: 14 };
-          scrollToRot = {y: -Math.PI/ 2 * 0.9, x: Math.PI / 2 , z: 0  };
+          scrollToRot = { y: -Math.PI / 2 * 0.9, x: Math.PI / 2, z: 0 };
+        } else if (vw <= 480) {
+          initialPos = { x: -0.5, y: 2, z: 4 };
+          initialScale = { x: 12, y: 12, z: 12 };
+          initialRot = { x: 0, y: 0, z: 0 };
+          toAnimatePos = { x: 0, y: 1.8, z: 0 };
+          toAnimateRot = { x: Math.PI / 2, y: 0, z: 0 };
+          scrollToPos = { x: 0, y: 0.8, z: 0 };
+          scrollToScale = { x: 12, y: 12, z: 12 };
+          scrollToRot = { y: -Math.PI / 2 * 0.9, x: Math.PI / 2, z: 0 };
+        } else if (vw <= 768) {
+          initialPos = { x: -1, y: 2, z: 4.5 };
+          initialScale = { x: 15, y: 15, z: 15 };
+          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5 };
+          toAnimatePos = { x: 0, y: 1.6, z: 0 };
+          toAnimateRot = { x: Math.PI / 2 * 0.9, y: 0, z: Math.PI / 2 * 0.1 };
+          scrollToPos = { x: 0, y: 1.4, z: 0 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: -Math.PI / 2 * 0.9, x: Math.PI / 2, z: 0 };
+        } else if (vw <= 1024) {
+          initialPos = { x: -1, y: 2, z: 4.5 };
+          initialScale = { x: 15, y: 15, z: 15 };
+          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5 };
+          toAnimatePos = { x: 0.2, y: 1.4, z: 0 };
+          toAnimateRot = { x: Math.PI / 2 * 0.9, y: 0, z: Math.PI / 2 * 0.1 };
+          scrollToPos = { x: 0, y: 1, z: 0 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: -Math.PI / 2 * 0.9, x: Math.PI / 2, z: 0 };
+        } else if (vw <= 1300) {
+          initialPos = { x: -1, y: 2, z: 4.5 };
+          initialScale = { x: 17, y: 17, z: 17 };
+          initialRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 4.3, z: Math.PI / 2 * 0.5 };
+          toAnimatePos = { x: -0.8, y: 1.1, z: 0 };
+          toAnimateRot = { x: Math.PI / 2 * 0.9, y: 0, z: Math.PI / 2 * 0.1 };
+          scrollToPos = { x: 1.1, y: 0.9, z: 0.5 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: -Math.PI / 2 * 0.9, x: Math.PI / 2, z: 0 };
+        } else {
+          initialPos = { x: -2, y: 1, z: 6 };
+          initialScale = { x: 16.5, y: 16.5, z: 16.5 };
+          initialRot = { x: Math.PI / 2 * 0.7, y: Math.PI / 2 * 1.6, z: 0 };
+          toAnimatePos = { x: -1.8, y: 0.7, z: 0 };
+          toAnimateRot = { x: Math.PI / 2 * 0.8, y: Math.PI / 2 * 0.3, z: -Math.PI / 2 * 0.1 };
+          scrollToPos = { x: 1.5, y: 1, z: 0.5 };
+          scrollToScale = { x: 16, y: 16, z: 16 };
+          scrollToRot = { y: Math.PI / 2 * 2.5, x: Math.PI / 2 };
         }
 
         ringModel.position.set(initialPos.x, initialPos.y, initialPos.z);
@@ -192,60 +186,30 @@ const RingModel = ({ mainContainer }) => {
         ringModel.rotation.set(initialRot.x, initialRot.y, initialRot.z);
         scene.add(ringModel);
 
-        // Animate the model smoothly from its initial position to the "toAnimatePos" and rotation
-        gsap.to(
-          ringModel.position,
-          {
-            ...toAnimatePos,
-            duration: 2.5,
-            ease: "power2.inOut",
+        gsap.to(ringModel.position, {
+          ...toAnimatePos,
+          duration: 1.5,
+          ease: "power2.inOut",
+        },);
+
+        gsap.to(ringModel.rotation, {
+          ...toAnimateRot,
+          duration: 1.5,  
+          ease: "power2.inOut",
+          onComplete: () => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: mainContainer.current,
+                start: "top 10%",
+                end: "bottom bottom",
+                scrub: 2,
+              },
+            });
+            tl.to(ringModel.position, { ...scrollToPos, ease: "power2.inOut" }, 0);
+            tl.to(ringModel.rotation, { ...scrollToRot, ease: "power2.inOut" }, 0);
+            tl.to(ringModel.scale, { ...scrollToScale, ease: "power2.inOut" }, 0);
           },
-          0
-        );
-        gsap.to(
-          ringModel.rotation,
-          {
-            ...toAnimateRot,
-            duration: 2,
-            ease: "power2.inOut",
-            onComplete: () => {
-              // Start scrollTrigger timeline after initial animation
-              var tl = gsap.timeline({
-                scrollTrigger: {
-                  trigger: mainContainer.current,
-                  start: "top 10%",
-                  end: "bottom bottom",
-                  scrub: 2,
-                },
-              });
-              tl.to(
-                ringModel.position,
-                {
-                  ...scrollToPos,
-                  ease: "power2.inOut",
-                },
-                0
-              );
-              tl.to(
-                ringModel.rotation,
-                {
-                  ...scrollToRot,
-                  ease: "power2.inOut",
-                },
-                0
-              );
-              tl.to(
-                ringModel.scale,
-                {
-                  ...scrollToScale,
-                  ease: "power2.inOut",
-                },
-                0
-              );
-            },
-          },
-          0
-        );
+        },);
       },
       undefined,
       (error) => {
@@ -263,6 +227,13 @@ const RingModel = ({ mainContainer }) => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+
+      // ✅ GSAP cleanup
+      gsap.killTweensOf("*");
+      ScrollTrigger.killAll();
+      ScrollTrigger.refresh();
+
+      // ✅ Remove renderer DOM element
       if (rendererRef.current) {
         rendererRef.current.dispose();
         if (
@@ -274,20 +245,21 @@ const RingModel = ({ mainContainer }) => {
           );
         }
       }
+
+      // ✅ Free DRACO + HDRI memory
       if (dracoLoaderRef.current) {
         dracoLoaderRef.current.dispose();
       }
       if (envMapRef.current) {
         envMapRef.current.dispose();
       }
+
+      // Optional: Reset trigger (if needed)
+      // if (typeof reset === "function") reset();
     };
   }, [mountModel]);
 
-  return (
-    <div className={style.Canvas_box}
-      ref={mountRef}
-    ></div>
-  );
+  return <div className={style.Canvas_box} ref={mountRef}></div>;
 };
 
 export default RingModel;
