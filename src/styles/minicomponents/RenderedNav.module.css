@@ -28,7 +28,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    background: linear-gradient(90deg, #fff5f5 0%, #ffe5e5 100%);
+    /* background: linear-gradient(90deg, #fff5f5 0%, #ffe5e5 100%); */
     border-radius: 18px 18px 0 0;
     box-shadow: 0 2px 8px 0 rgba(187, 79, 79, 0.08);
     padding: 0.3rem 0.5rem 0.1rem 0.5rem;
@@ -39,7 +39,7 @@
     flex: 1 1 0;
     text-align: center;
     border-bottom: 2.5px solid transparent;
-    border-radius: 12px 12px 0 0;
+    /* border-radius: 12px 12px 0 0; */
     padding: 0.5rem 0;
     margin: 0 0.2rem;
     font-weight: 500;
@@ -60,13 +60,13 @@
 .categories h2:focus {
     background: #fff6f6;
     color: #b92f2f;
-    border-bottom: 2.5px solid #b92f2f;
+    border-bottom: 2.5px solid #ffd0d0;
     box-shadow: 0 2px 8px 0 rgba(187, 79, 79, 0.13);
     outline: none;
 }
 
 .categories h2.active {
-    background: #ffa7a7;
+    background: #ffe9e9;
     border-bottom: 2.5px solid #b92f2f;
 }
 
@@ -80,19 +80,23 @@
 }
 
 .middle_ctgy div {
-    background: #ffe5e5;
-    border-radius: 50px;
+    /* background: #000000; */
+    /* border-top-right-radius: 15px; */
+    /* border-top-left-radius: 15px; */
+    /* border-radius: 5px; */
     width: 15%;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.5s;
-    box-shadow: 0 2px 8px 0 rgba(187, 79, 79, 0.10);
+    /* box-shadow: 0 2px 8px 0 rgba(187, 79, 79, 0.10); */
+    /* border-bottom: 1px solid #ffa7a7; */
+    box-shadow: inset 0 -2px 10px -9px rgba(255, 7, 7, 0.5);
 }
 
 .middle_ctgy div:hover {
-    background: #ffcaca;
+    background: #fffafa;
 }
 
 .middle_ctgy div h1 {
@@ -109,7 +113,7 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     width: 20%;
-    height: 90%;
+    height: 98%;
 }
 
 .right_Col img {
@@ -121,37 +125,54 @@
 
 /* For screens <= 1024px */
 @media (max-width: 1024px) {
+    .outer_Nav {
+        padding: 0 0.3rem;
+    }
     .renNav_Wrapper {
-        gap: 0.7rem;
+        flex-direction: column;
+        gap: 0.5rem;
     }
     .left_Col {
-        width: 75%;
-        gap: 0.7rem;
+        width: 100%;
+        gap: 0.5rem;
     }
     .categories {
-        gap: 0.7rem;
-        padding: 0.25rem 0.4rem 0.08rem 0.4rem;
+        gap: 0.3rem;
+        padding: 0.15rem 0.15rem 0.03rem 0.15rem;
+        border-radius: 12px 12px 0 0;
     }
     .categories h2 {
-        font-size: 1rem;
-        padding: 0.4rem 0;
+        font-size: 0.85rem;
+        padding: 0.25rem 0;
+        margin: 0 0.1rem;
+        border-radius: 8px 8px 0 0;
     }
     .middle_ctgy {
-        gap: 0.7rem;
+        gap: 0.3rem;
     }
     .middle_ctgy div {
-        width: 18%;
+        width: 45%;
+        min-width: 110px;
+        font-size: 0.8rem;
     }
     .right_Col {
-        width: 25%;
+        width: 100%;
+        height: 120px;
+        margin-top: 0.7rem;
+        border-radius: 8px 8px 3px 3px;
+    }
+    .right_Col img {
+        display: none;
     }
 }
 
 /* For screens <= 768px */
 @media (max-width: 768px) {
+    .outer_Nav {
+        padding: 0 0.3rem;
+    }
     .renNav_Wrapper {
         flex-direction: column;
-        /* align-items: stretch; */
         gap: 0.5rem;
     }
     .left_Col {
@@ -159,24 +180,32 @@
         gap: 0.5rem;
     }
     .categories {
-        gap: 0.5rem;
-        padding: 0.2rem 0.3rem 0.05rem 0.3rem;
-        font-size: 0.95rem;
+        gap: 0.3rem;
+        padding: 0.15rem 0.15rem 0.03rem 0.15rem;
+        border-radius: 12px 12px 0 0;
     }
     .categories h2 {
-        font-size: 0.95rem;
-        padding: 0.35rem 0;
+        font-size: 0.85rem;
+        padding: 0.25rem 0;
+        margin: 0 0.1rem;
+        border-radius: 8px 8px 0 0;
     }
     .middle_ctgy {
-        gap: 0.5rem;
+        gap: 0.3rem;
     }
     .middle_ctgy div {
-        width: 22%;
+        width: 45%;
+        min-width: 110px;
+        font-size: 0.8rem;
     }
     .right_Col {
         width: 100%;
-        height: 180px;
-        margin-top: 1rem;
+        height: 120px;
+        margin-top: 0.7rem;
+        border-radius: 8px 8px 3px 3px;
+    }
+    .right_Col img {
+        display: none;
     }
 }
 
@@ -210,6 +239,9 @@
         margin-top: 0.7rem;
         border-radius: 8px 8px 3px 3px;
     }
+    .right_Col img {
+        display: none;
+    }
 }
 
 /* For screens <= 390px */
@@ -238,5 +270,8 @@
         height: 80px;
         margin-top: 0.4rem;
         border-radius: 5px 5px 2px 2px;
+    }
+    .right_Col img {
+        display: none;
     }
 }

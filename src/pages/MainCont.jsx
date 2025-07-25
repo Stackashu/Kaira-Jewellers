@@ -11,11 +11,11 @@ const MainCont = () => {
   return (
     <div>
       <AnimationCompo />
+      <Catogories />
       <Gallery />
       <Services />
       <BlackBanner />
       <Testimonials />
-      <Catogories />
     </div>
   );
 };

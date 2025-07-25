@@ -1,4 +1,3 @@
-//
 import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "../../styles/LandingPage/Navbar.module.css";
 import headeLogo from "../../assets/Images/KairaLogo.png";
@@ -41,6 +40,26 @@ const Navbar = () => {
     setActiveIdx(getActiveIdx(location.pathname));
   }, [location.pathname]);
 
+  // 🔽 New: Close tray if clicked outside in mobile/tablet view
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (window.innerWidth > 1024) return;
+
+      if (
+        navBarRef.current &&
+        !navBarRef.current.contains(event.target)
+      ) {
+        setIsTrayOpen(false);
+        setIsHoveringJewellery(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <header className={`${style.header_OuterBox}`}>
       <div
@@ -60,7 +79,10 @@ const Navbar = () => {
           }`}
         >
           <svg
-            onClick={() => setIsTrayOpen(false)}
+            onClick={() => {
+              setIsTrayOpen(false);
+              setIsHoveringJewellery(false);
+            }}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -96,9 +118,9 @@ const Navbar = () => {
                     navigate(`${item.link}`);
                   }}
                   onMouseEnter={() => {
-                    if (item.name === "Jewellery") setIsHoveringJewellery(true);
-                    if (item.name !== "Jewellery")
-                      setIsHoveringJewellery(false);
+                    if (item.name === "Jewellery")
+                      setIsHoveringJewellery(true);
+                    else setIsHoveringJewellery(false);
                   }}
                   style={{
                     color: activeIdx === idx ? "rgb(179, 100, 100)" : "",
@@ -178,7 +200,7 @@ const Navbar = () => {
         onMouseLeave={() => setIsHoveringJewellery(false)}
         style={{ display: isHoveringJewellery ? "block" : "none" }}
       >
-        <RenderedNav/>
+        <RenderedNav />
       </div>
     </header>
   );

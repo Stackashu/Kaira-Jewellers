@@ -76,6 +76,7 @@
   background:  #ffebf1;
   padding: 5px;
 }
+
 @media (max-width: 768px) {
   .masonryGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -137,6 +138,21 @@
   font-size: 5rem;
   margin-top: -2rem;
 }
+@media (max-width: 1400px){
+  .titleText h1{
+    font-size: 6rem;
+  }
+  .double_Text h1{
+    font-size: 5rem;
+    margin-top: -5rem;
+  }
+  .double_Text h2{
+    
+    font-size: 4.5rem;
+  }
+  .pic_Cont{background: transparent;}
+}
+
 @media (max-width: 1024px) {
   .bestsellerCard {
     flex-direction: column;

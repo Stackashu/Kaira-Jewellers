@@ -1,6 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "../../styles/minicomponents/RenderedNav.module.css";
 import img from "../../assets/Images/jewellery.jpg";
+import { ContactCon } from "../../Context/ContactContext";
+import ban1 from '../../assets/Images/loadedImgData/dBanner.jpg'
+import ban2 from '../../assets/Images/loadedImgData/gBanner.jpg'
+import ban3 from '../../assets/Images/loadedImgData/sBanner.jpg'
+import img1 from '../../assets/Images/gold/g1.webp'
+import img2 from '../../assets/Images/gold/g2.webp'
+import img3 from '../../assets/Images/gold/g3.webp'
+import img4 from '../../assets/Images/gold/g4.webp'
+import img5 from '../../assets/Images/gold/g5.webp'
+import { useNavigate } from 'react-router-dom'
+
 
 const items = [
   {
@@ -56,10 +67,28 @@ const items = [
   }
 ];
 
-const category = ["Diamond", "Gold", "Silver"];
+const category = [
+  { name: "Diamond", banner: ban1 },
+  { name: "Gold", banner: ban2 },
+  { name: "Silver", banner: ban3 }
+];
 
 const RenderedNav = () => {
   const [activeIdx, setActiveIdx] = useState(0);
+  const { setLoadedDataName, loadedDataName } = useContext(ContactCon)
+  const navigate = useNavigate()
+
+
+  const handleRequiredData = ()=>{
+    if(true){
+      // here call the api for the requested data 
+      navigate('/Jewellery')
+    }else{
+      return
+    }
+  
+ 
+  }
 
   return (
     <div className={style.outer_Nav}>
@@ -70,11 +99,15 @@ const RenderedNav = () => {
           <div className={style.categories}>
             {category.map((ctg, idx) => (
               <h2
-                key={ctg}
+                key={idx}
                 className={activeIdx === idx ? style.active : ""}
-                onClick={() => setActiveIdx(idx)}
+                onClick={() => {
+                  setActiveIdx(idx);
+                  setLoadedDataName({ name: ctg.name, banner: ctg.banner, images:[img1,img2,img3,img4,img5 ]}); //add images in that after api call
+                  handleRequiredData()
+                }}
               >
-                {ctg}
+                {ctg.name}
               </h2>
             ))}
           </div>

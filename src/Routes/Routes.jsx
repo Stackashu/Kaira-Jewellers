@@ -6,6 +6,8 @@ import Franchise from "../pages/Franchise";
 import CustomizeProduct from "../pages/CustomizeProduct";
 import MainCont from "../pages/MainCont";
 import GalleryShowCase from "../pages/GalleryShowCase";
+import LoadedImg from "../pages/LoadedImg.jsx"
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "Customization",
         element: <CustomizeProduct />,
+      },
+      {
+        path: "Jewellery",
+        element: <LoadedImg />,
       }
     ],
   },
