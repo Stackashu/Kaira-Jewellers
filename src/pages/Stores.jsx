@@ -1,9 +1,7 @@
-// StoreLocations.jsx
-import React from 'react';
-import style from "../styles/pages/Stores.module.css"
-import img1 from "../assets/Images/stores/shopimg1.jpeg"
-import img2 from "../assets/Images/stores/shopimg2.jpeg"
-import img3 from "../assets/Images/stores/shopimg3.jpeg"
+import React, { useContext, useEffect } from 'react';
+import style from "../styles/pages/Stores.module.css";
+import { ContactCon } from '../Context/ContactContext';
+import axios from 'axios';
 
 const registeredOffice = {
   name: 'Registered Office',
@@ -12,30 +10,6 @@ const registeredOffice = {
   mapSrc: 'https://www.google.com/maps?q=Shop+No.1,+Huda+Market,+Sector+23,+Gurugram,+Haryana,+India&output=embed',
   icon: '🏢',
 };
-
-const stores = [
-  {
-    name: 'Gurugram Store',
-    address: 'KS Diamond Jewellers, Sector 23, Gurugram, Haryana',
-    phone: ['+91 124 405 2774'],
-    mapSrc: 'https://www.google.com/maps?q=KS+Diamond+Jewellers,+Sector+23,+Gurugram,+Haryana&output=embed',
-    image: img1,
-  },
-  {
-    name: 'Greater Noida Store',
-    address: 'City Centre, Greater Noida, Uttar Pradesh',
-    phone: ['+91 7065 546 678'],
-    mapSrc: 'https://www.google.com/maps?q=City+Centre,+Greater+Noida,+Uttar+Pradesh&output=embed',
-    image: img2,
-  },
-  {
-    name: 'City Plaza Store',
-    address: 'City Plaza, Greater Noida',
-    phone: ['+91 7065 546 678'],
-    mapSrc: 'https://www.google.com/maps?q=City+Plaza,+Greater+Noida&output=embed',
-    image: img3,
-  }
-];
 
 const RegisteredOfficeCard = ({ office }) => (
   <div className={style['registered-office-card']}>
@@ -52,7 +26,7 @@ const RegisteredOfficeCard = ({ office }) => (
       src={office.mapSrc}
       loading="lazy"
       className={style['store-map']}
-      allowFullScreen=""
+      allowFullScreen
       referrerPolicy="no-referrer-when-downgrade"
       title="Registered Office Map"
     ></iframe>
@@ -61,7 +35,7 @@ const RegisteredOfficeCard = ({ office }) => (
 
 const StoreCard = ({ store }) => (
   <div className={style['store-card']}>
-    {store.image && (
+    {store?.image && (
       <img
         src={store.image}
         alt={store.name}
@@ -72,18 +46,32 @@ const StoreCard = ({ store }) => (
       <h3 className={style['store-title']}>{store.icon || '📍'} {store.name}</h3>
       <p className={style['store-address']}>{store.address}</p>
       <div className={style['store-contact']}>
-        {store.phone.map((phone, idx) => (
-          <a key={idx} href={`tel:${phone.replace(/ /g, '')}`} className={style['store-phone']}>
-            📞 {phone}
-          </a>
-        ))}
+        {Array.isArray(store.phone)
+          ? store.phone.map((phone, idx) => (
+              <a
+                key={idx}
+                href={`tel:${phone.replace(/ /g, '')}`}
+                className={style['store-phone']}
+              >
+                📞 {phone}
+              </a>
+            ))
+          : store.phone && (
+              <a
+                href={`tel:${store.phone.replace(/ /g, '')}`}
+                className={style['store-phone']}
+              >
+                📞 {store.phone}
+              </a>
+            )
+        }
       </div>
-      {store.mapSrc && (
+      {store.mapsrc && (
         <iframe
-          src={store.mapSrc}
+          src={store.mapsrc}
           loading="lazy"
           className={style['store-map']}
-          allowFullScreen=""
+          allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
           title={`${store.name} Map`}
         ></iframe>
@@ -93,6 +81,17 @@ const StoreCard = ({ store }) => (
 );
 
 const StoreLocations = () => {
+  const { page2, setPage2 } = useContext(ContactCon);
+
+  useEffect(() => {
+    axios
+      .get("/api/data/page2")
+      .then((res) => {
+        setPage2(res.data.store);
+      })
+      .catch((err) => console.error(err));
+  }, [setPage2]);
+
   return (
     <section className={style['store-section']}>
       <div className={style['store-header']}>
@@ -101,9 +100,13 @@ const StoreLocations = () => {
       </div>
       <RegisteredOfficeCard office={registeredOffice} />
       <div className={style['store-grid']}>
-        {stores.map((store, index) => (
-          <StoreCard key={index} store={store} />
-        ))}
+        {Array.isArray(page2) && page2.length > 0 ? (
+          page2.map((store, index) => (
+            <StoreCard key={index} store={store} />
+          ))
+        ) : (
+          <p className={style['no-stores']}>No stores found.</p>
+        )}
       </div>
     </section>
   );

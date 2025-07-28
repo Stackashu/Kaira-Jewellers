@@ -1,5 +1,5 @@
 import style from '../../styles/LandingPage/Services.module.css';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

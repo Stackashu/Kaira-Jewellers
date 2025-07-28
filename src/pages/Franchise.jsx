@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "../styles/pages/Franchise.module.css";
-import gunjan from ".././assets/Images/franchise/gunjan.jpeg"
-import vikas from ".././assets/Images/franchise/vikas.jpg"
+import gunjan from ".././assets/Images/franchise/gunjan.jpeg";
+import vikas from ".././assets/Images/franchise/vikas.jpg";
 import { ContactCon } from "../Context/ContactContext";
+import axios from "axios";
 
 const points = [
   {
@@ -38,7 +39,7 @@ const states = [
   "Dehradun",
   "Agra",
 ];
-const user= [
+const user = [
   {
     name: "Mr. Gunjan Sharma",
     role: "Director",
@@ -49,8 +50,23 @@ const user= [
     role: "Director",
     image: vikas,
   },
-]
+];
 const Franchise = () => {
+  const { page4, setPage4 } = useContext(ContactCon);
+  useEffect(() => {
+    axios
+      .get("api/data/page4")
+      .then((res) => {
+        setPage4(res.data);
+        // console.log(res.data)
+        // Set the user array with the data from page4 if available
+        if (res.data && res.data.user && Array.isArray(res.data.user)) {
+          // Overwrite the user array with the data from page4
+          user.splice(0, user.length, ...res.data.user);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
   const { setOpenFranchiseForm } = useContext(ContactCon);
   const drivers = [
     {
@@ -90,7 +106,9 @@ const Franchise = () => {
   ];
   return (
     <div className={style.Franchise_Out}>
-      <h1 className={style.Main_head}>India's Fastest Growing Diamond Gold Jewellery brand Franchise</h1>
+      <h1 className={style.Main_head}>
+        India's Fastest Growing Diamond Gold Jewellery brand Franchise
+      </h1>
       {/* RollOUt  */}
       <div className={style.Fra2_out}>
         <h1>Rollout Plan</h1>
@@ -135,7 +153,11 @@ const Franchise = () => {
         <div className={style.growthGrid}>
           {drivers.map((item, i) => (
             <div className={style.growthCard} key={i}>
-              <img src={item.image} alt={item.title} className={style.growthImg} />
+              <img
+                src={item.image}
+                alt={item.title}
+                className={style.growthImg}
+              />
               <h3>{item.title}</h3>
               <ul>
                 {item.content.map((point, idx) => (
@@ -152,19 +174,26 @@ const Franchise = () => {
         <div className={style.managementGrid}>
           {user.map((person, index) => (
             <div className={style.managementCard} key={index}>
-              <img src={person.image} alt={person.name} className={style.managementImg} />
+              <img
+                src={person.image}
+                alt={person.name}
+                className={style.managementImg}
+              />
               <h3>{person.name}</h3>
               <p className={style.role}>({person.role})</p>
             </div>
           ))}
         </div>
         <p className={style.tagline}>
-          We believe in teamwork, and our Core Management team is ready to help you succeed!
+          We believe in teamwork, and our Core Management team is ready to help
+          you succeed!
         </p>
       </section>
       {/* Quote and Button Row */}
       <div className={style.franchiseQuoteRow}>
-        <span className={style.franchiseQuote}>Want to be a Franchise partner?</span>
+        <span className={style.franchiseQuote}>
+          Want to be a Franchise partner?
+        </span>
         <button
           className={style.franchiseQuoteBtn}
           onClick={() => setOpenFranchiseForm(true)}

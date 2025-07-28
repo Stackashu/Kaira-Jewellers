@@ -1,27 +1,28 @@
 import style from "../../styles/LandingPage/About.module.css";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ContactCon } from "../../Context/ContactContext";
 
 gsap.registerPlugin(ScrollTrigger);
-const para = ` At KS Kaira Jewellers Pvt. Ltd., jewellery is not only an adornment
-            but an expression of identity, elegance, and cultural legacy. Based in
-            Palam Vihar, Gurgaon, we have earned a trusted name in the jewellery
-            industry through our unwavering commitment to quality, craftsmanship,
-            and customer satisfaction. Our journey began with a vision to
-            seamlessly blend traditional artistry with modern aesthetics, crafting
-            timeless pieces that speak to both heritage and individuality.`
+// const para = ` At KS Kaira Jewellers Pvt. Ltd., jewellery is not only an adornment
+//             but an expression of identity, elegance, and cultural legacy. Based in
+//             Palam Vihar, Gurgaon, we have earned a trusted name in the jewellery
+//             industry through our unwavering commitment to quality, craftsmanship,
+//             and customer satisfaction. Our journey began with a vision to
+//             seamlessly blend traditional artistry with modern aesthetics, crafting
+//             timeless pieces that speak to both heritage and individuality.`
 
-const aboutData = [
-  {
-    num:"500",
-    name:"Happy Customers"
-  },
-  {
-    num:"5",
-    name:"Branches"
-  }
-]
+// const aboutData = [
+//   {
+//     num:"500",
+//     name:"Happy Customers"
+//   },
+//   {
+//     num:"5",
+//     name:"Branches"
+//   }
+// ]
 
 const About = () => {
   const containerRef = useRef(null);
@@ -30,6 +31,8 @@ const About = () => {
   const paragraphRef = useRef(null);
   const countingRef = useRef(null);
 
+  const{page1} = useContext(ContactCon);
+//  console.log(page1?.about?.LargeText)
   useEffect(() => {
     if (containerRef.current) {
       gsap.fromTo(
@@ -111,11 +114,11 @@ const About = () => {
         <h1 ref={aboutHeaderRef} className={style.about}>About Us</h1>
         <div ref={bottomContainerRef} className={style.bottom_Container}>
           <p ref={paragraphRef}>
-           {para}
+           {page1?.about?.LargeText}
           </p>
 
           <div ref={countingRef} className={style.Counting}>
-            {aboutData.map((data,idx)=>(
+            {page1?.about?.numberData?.map((data,idx)=>(
               <div  key={idx} className={style.happy_Customers}>
                 <h1 className={style.num}>{data.num}+</h1>
                 <h1 className={style.text}>{data.name}</h1>

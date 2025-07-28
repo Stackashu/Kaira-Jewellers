@@ -49,8 +49,8 @@ const RingModel = ({ mainContainer }) => {
     );
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
-    renderer.shadowMap.enabled = true;
+    renderer.toneMappingExposure = 1;
+    renderer.shadowMap.enabled = false;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     rendererRef.current = renderer;
 
@@ -76,12 +76,12 @@ const RingModel = ({ mainContainer }) => {
     topLight.castShadow = true;
     topLight.shadow.mapSize.width = 1024;
     topLight.shadow.mapSize.height = 1024;
-    topLight.shadow.camera.near = 1;
-    topLight.shadow.camera.far = 30;
-    topLight.shadow.camera.left = -10;
-    topLight.shadow.camera.right = 10;
-    topLight.shadow.camera.top = 10;
-    topLight.shadow.camera.bottom = -10;
+    // topLight.shadow.camera.near = 1;
+    // topLight.shadow.camera.far = 30;
+    // topLight.shadow.camera.left = -10;
+    // topLight.shadow.camera.right = 10;
+    // topLight.shadow.camera.top = 10;
+    // topLight.shadow.camera.bottom = -10;
     scene.add(topLight);
 
     const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);

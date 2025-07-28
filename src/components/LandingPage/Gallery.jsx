@@ -1,16 +1,19 @@
 import style from "../../styles/LandingPage/Gallery.module.css";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ContactCon } from "../../Context/ContactContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Collections = () => {
   const outerRef = useRef(null);
   const videoRef = useRef(null);
-
+  const{page1} = useContext(ContactCon)
+  // console.log(page1?.video) // set here your  video ---------------------------------------- 
   useEffect(() => {
     if (!videoRef.current || !outerRef.current) return;
+ 
 
     // Responsive values
     let startValue, borderRadius, scaleValue, endValue;

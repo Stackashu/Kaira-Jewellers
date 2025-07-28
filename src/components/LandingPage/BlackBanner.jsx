@@ -1,23 +1,15 @@
 import style from "../../styles/LandingPage/BlackBanner.module.css";
-import React, { useRef, useEffect } from "react";
-import img1 from "../../assets/Images/BlackLayout/img1.jpeg";
-import img2 from "../../assets/Images/BlackLayout/img2.jpeg";
-import img3 from "../../assets/Images/BlackLayout/img3.jpeg";
-import img4 from "../../assets/Images/BlackLayout/img4.jpeg";
-import img5 from "../../assets/Images/BlackLayout/img5.jpeg";
-import img6 from "../../assets/Images/BlackLayout/img6.jpeg";
-import img7 from "../../assets/Images/BlackLayout/img7.jpeg";
-import img8 from "../../assets/Images/BlackLayout/img8.jpg";
-import img9 from "../../assets/Images/BlackLayout/img9.png";
+import React, { useRef, useEffect, useContext } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ContactCon } from "../../Context/ContactContext";
  
 gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
   const masonryRef = useRef(null);
   const imgRefs = useRef([]);
-
+  const{page1} = useContext(ContactCon)
   useEffect(() => {
     if (!masonryRef.current) return;
 
@@ -78,7 +70,7 @@ const Gallery = () => {
         {/* Bestseller Card */}
         <div className={style.bestsellerCard}>
           <div className={style.pic_Cont}>
-          <img src={img8} alt="Bestseller" />
+          <img src={page1?.banner?.[0]} alt="Bestseller" />
           </div>
          
           <div className={style.titleText}>
@@ -96,7 +88,7 @@ const Gallery = () => {
           </div>
         
           <div className={style.pic_Cont}>
-          <img src={img9} alt="Customization" />
+          <img src={page1?.banner?.[1]} alt="Customization" />
            </div>
         </div>
 
@@ -106,43 +98,43 @@ const Gallery = () => {
 
       <div className={style.masonryGrid} ref={masonryRef}>
         <img
-          src={img1}
+          src={page1?.banner?.[2]}
           alt="img1"
           className={style.item1}
           ref={(el) => (imgRefs.current[0] = el)}
         />
         <img
-          src={img2}
+          src={page1?.banner?.[3]}
           alt="img2"
           className={style.item2}
           ref={(el) => (imgRefs.current[1] = el)}
         />
         <img
-          src={img3}
+          src={page1?.banner?.[4]}
           alt="img3"
           className={style.item3}
           ref={(el) => (imgRefs.current[2] = el)}
         />
         <img
-          src={img4}
+          src={page1?.banner?.[5]}
           alt="img4"
           className={style.item4}
           ref={(el) => (imgRefs.current[3] = el)}
         />
         <img
-          src={img5}
+          src={page1?.banner?.[6]}
           alt="img5"
           className={style.item5}
           ref={(el) => (imgRefs.current[4] = el)}
         />
         <img
-          src={img6}
+          src={page1?.banner?.[7]}
           alt="img6"
           className={style.item6}
           ref={(el) => (imgRefs.current[5] = el)}
         />
         <img
-          src={img7}
+          src={page1?.banner?.[8]}
           alt="img7"
           className={style.item7}
           ref={(el) => (imgRefs.current[6] = el)}

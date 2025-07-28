@@ -1,5 +1,5 @@
 import style from "../../styles/LandingPage/Testimonials.module.css";
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, Scrollbar } from "swiper/modules";
 import "swiper/css";
@@ -7,41 +7,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import TestimonialCard from "../minicomponents/TestimonialCard";
+import { ContactCon } from "../../Context/ContactContext";
 
-const testimonialsData = [
-  {
-    name: "Amit Sharma",
-    img: "https://randomuser.me/api/portraits/men/32.jpg",
-    text: "Absolutely loved the craftsmanship ."
-  },
-  {
-    name: "Rahul Verma",
-    img: "https://randomuser.me/api/portraits/men/45.jpg",
-    text: "Fast delivery and beautiful packaging"
-  },
-  {
-    name: "Rahul Verma",
-    img: "https://randomuser.me/api/portraits/men/45.jpg",
-    text: "Fast delivery and beautiful packaging"
-  },
-  {
-    name: "Rahul Verma",
-    img: "https://randomuser.me/api/portraits/men/45.jpg",
-    text: "Fast delivery and beautiful packaging"
-  },
-  {
-    name: "Priya Singh",
-    img: "https://randomuser.me/api/portraits/women/65.jpg",
-    text: "The jewelry exceeded my expectations."
-  },
-  {
-    name: "Meera Joshi",
-    img: "https://randomuser.me/api/portraits/women/23.jpg",
-    text: "Support was very helpful and friendly."
-  }
-];
+
 
 const Testimonials = () => {
+  const{page1} = useContext(ContactCon)
   return (
     <div className={style.test_Cont}>
       <div className={`${style.bubble} ${style.b1}`}></div>
@@ -73,7 +44,7 @@ const Testimonials = () => {
         }}
         className={style.swiper}
       >
-        {testimonialsData.map((testimonial, idx) => (
+        {page1?.testimonial?.map((testimonial, idx) => (
           <SwiperSlide key={idx}>
             <TestimonialCard
               name={testimonial.name}

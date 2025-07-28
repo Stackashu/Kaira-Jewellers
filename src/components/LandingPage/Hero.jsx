@@ -1,9 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react';
 import style from "../../styles/LandingPage/Hero.module.css";
 import gsap from 'gsap';
+import { ContactCon } from '../../Context/ContactContext';
 
-const qoute ="  Jewellery is a story you wear, a memory you treasure, and a promise you keep."
+// const qoute ="  Jewellery is a story you wear, a memory you treasure, and a promise you keep."
 const Hero = () => {
+  const{page1} = useContext(ContactCon)
   const heroRef = useRef(null);
 
 
@@ -30,38 +32,12 @@ const Hero = () => {
             Jewellers
           </h1>
           <p>
-           {qoute}
+           {page1.qoute}
           </p>
         </div>
 
         <div className={style.Button_box}>
           <div className={style.Button_Wrapper}>
-            {/* <svg
-              className={style.arrow_Down}
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="30" height="30" rx="6" fill="#fff" />
-            
-              <line
-                x1="16"
-                y1="8"
-                x2="16"
-                y2="20"
-                stroke="#000"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              
-              <path
-                d="M10 18l6 6 6-6"
-                stroke="#000"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg> */}
             <h1>EXPLORE</h1>
           </div>
         </div>

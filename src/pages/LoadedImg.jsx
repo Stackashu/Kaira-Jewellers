@@ -17,7 +17,7 @@ const Diamond = () => {
         <div className={style.img_Cont1}>
           {loadedDataName.images.map((img,idx)=>(
             <div className={style.img_Hold} key={idx}>
-              <div className={style.animated_div}> Get this item</div>
+              <div className={style.animated_div}> Visit Shop</div>
               <img src={img} alt={img}/>
             </div>
           ))}
